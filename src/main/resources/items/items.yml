@@ -20,3 +20,40 @@ example_item_with_taglist:
 example_item_minimal:
   display_name: '&aThe Most Minimalist Item'
   material: DIAMOND
+# The following are for NobilityRegions example outputs
+nr-stone:
+  display_name: '&e&lStone'
+  material: STONE
+  tags:
+    - COMMON
+    - ORE
+nr-iron_ore:
+  display_name: '&e&lIron Ore'
+  material: IRON_ORE
+  tags:
+    - COMMON
+    - ORE
+nr-dark_oak:
+  display_name: '&e&lDark Oak'
+  material: DARK_OAK_LOG
+  tags:
+    - UNCOMMON
+    - WOOD
+nr-dark_oak_planks:
+  display_name: '&e&lDark Oak Planks'
+  material: DARK_OAK_PLANKS
+  tags:
+    - UNCOMMON
+    - WOOD
+nr-carrot:
+  display_name: '&e&lCarrot'
+  material: CARROT
+  tags:
+    - COMMON
+    - CROP
+nr-wheat:
+  display_name: '&e&lWheat'
+  material: HAY_BLOCK
+  tags:
+    - COMMON
+    - CROP

@@ -1,5 +1,17 @@
 COMMON: '&9Common'
+UNCOMMON: '&aUncommon'
+RARE: '&bRare'
 GEM: '&bGem'
 RARE_GEM:
   - '&5Rare'
   - '&bGem'
+# The following are for NoblityRegions example outputs
+ORE: 
+  - '&6Ore'
+  - '&7Resource'
+WOOD: 
+  - '&4Wood'
+  - '&7Resource'
+CROP: 
+  - '&2Crop'
+  - '&7Resource'
