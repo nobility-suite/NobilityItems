@@ -1,0 +1,11 @@
+example_item_internal_name:
+  display_name: '&eCool Fuel of Exampleocity'
+  material: COAL
+  model: 3
+  lore:
+    - '&cCommon Example Fuel'
+    - ''
+    - 'For Commoners'
+example_item_minimal:
+  display_name: '&aThe Most Minimalist Item'
+  material: DIAMOND
