@@ -1,5 +1,5 @@
 name: NobilityItems
-version: 0.0.1
+version: 0.1.0
 main: net.civex4.nobilityitems.NobilityItems
 api-version: 1.14
 commands:
@@ -9,3 +9,6 @@ commands:
   nilist:
     description: Lists out all loaded NobilityItems
     usage: /nilist
+  nicreate:
+    description: Creates a NobilityItem from the item in your hand
+    usage: /nicreate <item_name>

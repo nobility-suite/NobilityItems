@@ -1,6 +1,7 @@
 package net.civex4.nobilityitems;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -12,12 +13,16 @@ import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 
 public class ItemManager {
     private static Map<String, NobilityItem> items;
+    private static File file;
     private static FileConfiguration config;
 
     protected static void init(File configFile) {
+        file = configFile;
+
         if (!configFile.exists()) {
             NobilityItems.getInstance().saveResource("items.yml", false);
         }
@@ -79,6 +84,42 @@ public class ItemManager {
 
             items.put(internalName, new NobilityItem(internalName, displayName, material, lore, model));
         }
+    }
+
+    public static boolean makeItem(String internalName, ItemStack item) {
+        if (items.keySet().contains(internalName) || !item.hasItemMeta()) {
+            return false;
+        }
+
+        ItemMeta meta = item.getItemMeta();
+
+        if (!meta.hasDisplayName()) {
+            return false;
+        }
+
+        Material material = item.getType();
+        String displayName = meta.getDisplayName();
+        List<String> lore = meta.hasLore() ? meta.getLore() : null;
+        int model = meta.hasCustomModelData() ? meta.getCustomModelData() : -1;
+
+        ConfigurationSection itemConfig = config.createSection(internalName);
+        itemConfig.set("display_name", displayName);
+        itemConfig.set("material", material.name());
+        if (meta.hasLore())
+            itemConfig.set("lore", lore);
+        if (meta.hasCustomModelData())
+            itemConfig.set("model", model);
+
+        items.put(internalName, new NobilityItem(internalName, displayName, material, lore, model));
+
+        try {
+            config.save(file);
+        } catch (IOException e) {
+            Bukkit.getLogger().severe("Unable to save config!");
+            e.printStackTrace();
+        }
+
+        return true;
     }
 
     public static List<NobilityItem> getItems() {

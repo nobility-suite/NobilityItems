@@ -14,10 +14,12 @@ public class CommandListItems implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (!sender.isOp()) {
             sender.sendMessage(ChatColor.RED + "Usage of this command is restricted!");
+            return true;
         }
 
         if (args.length != 0) {
             sender.sendMessage(ChatColor.RED + "Usage: /nilist");
+            return true;
         }
 
         for (NobilityItem item : ItemManager.getItems()) {
