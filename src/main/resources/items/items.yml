@@ -57,3 +57,20 @@ nr-wheat:
   tags:
     - COMMON
     - CROP
+# The following are for Nobility example blueprints
+example_result:
+  display_name: '&c&lExample Result'
+  material: PAPER
+  lore:
+    - '&cExample Lore'
+    - ''
+    - '&eLore is good for describing things'
+example_coal:
+  display_name: '&e&lCoal'
+  material: COAL
+example_iron_ingot:
+  display_name: '&e&lIron Ingot'
+  material: IRON_INGOT
+example_gold_ingot:
+  display_name: '&e&lGold Ingot'
+  material: GOLD_INGOT
