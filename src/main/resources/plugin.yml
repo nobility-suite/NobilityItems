@@ -1,5 +1,5 @@
 name: NobilityItems
-version: 0.1.0
+version: 0.1.1
 main: net.civex4.nobilityitems.NobilityItems
 api-version: 1.14
 commands:
