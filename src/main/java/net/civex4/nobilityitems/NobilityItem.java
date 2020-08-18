@@ -26,6 +26,10 @@ public class NobilityItem {
         this.customModelData = model;
     }
 
+    public String getInternalName() {
+        return internalName;
+    }
+
     /**
      * Gets the ItemStack represented by this NobilityItem
      * 

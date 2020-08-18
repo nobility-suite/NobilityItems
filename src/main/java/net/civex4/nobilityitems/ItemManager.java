@@ -13,7 +13,7 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.inventory.ItemStack;
 
-class ItemManager {
+public class ItemManager {
     private static Map<String, NobilityItem> items;
     private static FileConfiguration config;
 
@@ -44,7 +44,7 @@ class ItemManager {
             boolean cont = false;
 
             if (itemConfig.isString("display_name")) {
-                displayName = itemConfig.getString("display_name");
+                displayName = itemConfig.getString("display_name").replace('&', '§');
             } else {
                 Bukkit.getLogger().severe(itemConfig.getCurrentPath() + " has no display_name!");
                 cont = true;
@@ -65,6 +65,7 @@ class ItemManager {
 
             if (itemConfig.isList("lore")) {
                 lore = itemConfig.getStringList("lore");
+                lore.replaceAll(string -> string.replace('&', '§'));
             }
 
             if (itemConfig.isInt("model")) {
@@ -80,11 +81,11 @@ class ItemManager {
         }
     }
 
-    protected static List<NobilityItem> getItems() {
+    public static List<NobilityItem> getItems() {
         return new ArrayList<NobilityItem>(items.values());
     }
 
-    protected static NobilityItem getItem(String internalName) {
+    public static NobilityItem getItem(String internalName) {
         NobilityItem item = items.get(internalName);
 
         if (item == null) {
@@ -94,7 +95,7 @@ class ItemManager {
         return item;
     }
 
-    protected static NobilityItem getItem(ItemStack itemStack) {
+    public static NobilityItem getItem(ItemStack itemStack) {
         for (NobilityItem item : items.values()) {
             if (item.equals(itemStack)) {
                 return item;

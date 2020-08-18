@@ -2,3 +2,10 @@ name: NobilityItems
 version: 0.0.1
 main: net.civex4.nobilityitems.NobilityItems
 api-version: 1.14
+commands:
+  niget:
+    description: Gets a NobilityItem and puts it in your hand
+    usage: /niget <item_name>
+  nilist:
+    description: Lists out all loaded NobilityItems
+    usage: /nilist
