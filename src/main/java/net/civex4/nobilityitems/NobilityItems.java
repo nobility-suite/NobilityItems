@@ -21,21 +21,22 @@ public class NobilityItems extends JavaPlugin {
 
     /**
      * Gets a NobilityItem from its internal name (the one used
-     * in the items.yml config section header)
+     * in the items.yml config section header). Throws an
+     * IllegalArgumentException if the internal name does not
+     * align with any NobilityItem!
      * 
      * @param internalName String
-     * @return
+     * @return NobilityItem
      */
-    public static NobilityItem getItem(String internalName) {
+    public static NobilityItem getItemByName(String internalName) {
         return ItemManager.getItem(internalName);
     }
 
     /**
-     * Attempts to get a NobilityItem from an ItemStack. Returns
-     * null if there are no valid NobilityItems
+     * Attempts to get a NobilityItem from an ItemStack.
      * 
      * @param item ItemStack
-     * @return
+     * @return NobilityItem, null if no valid NobilityItems for this ItemStack
      */
     public static NobilityItem getItem(ItemStack item) {
         return ItemManager.getItem(item);

@@ -85,7 +85,13 @@ class ItemManager {
     }
 
     protected static NobilityItem getItem(String internalName) {
-        return items.get(internalName);
+        NobilityItem item = items.get(internalName);
+
+        if (item == null) {
+            throw new IllegalArgumentException(internalName + " is not a valid NobilityItem!");
+        }
+
+        return item;
     }
 
     protected static NobilityItem getItem(ItemStack itemStack) {
