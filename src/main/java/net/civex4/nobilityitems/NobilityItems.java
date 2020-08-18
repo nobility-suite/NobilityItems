@@ -20,7 +20,7 @@ public class NobilityItems extends JavaPlugin {
         getCommand("nilist").setExecutor(new CommandListItems());
         getCommand("nicreate").setExecutor(new CommandCreateItem());
 
-        ItemManager.init(new File(getDataFolder(), "items.yml"));
+        ItemManager.init(new File(getDataFolder(), "items"), new File(getDataFolder(), "tags.yml"));
     }
 
     protected static NobilityItems getInstance() {

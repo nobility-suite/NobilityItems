@@ -6,6 +6,17 @@ example_item_internal_name:
     - '&cCommon Example Fuel'
     - ''
     - 'For Commoners'
+  tags:
+    - COMMON
+    - GEM
+example_item_with_taglist:
+  display_name: '&eRARE Fuel of Exampleocity'
+  material: EMERALD
+  model: 2
+  lore:
+    - '&cCommon Example Fuel'
+  tags:
+    - RARE_GEM
 example_item_minimal:
   display_name: '&aThe Most Minimalist Item'
   material: DIAMOND

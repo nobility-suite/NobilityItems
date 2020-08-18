@@ -1,0 +1,5 @@
+COMMON: '&9Common'
+GEM: '&bGem'
+RARE_GEM:
+  - '&5Rare'
+  - '&bGem'
