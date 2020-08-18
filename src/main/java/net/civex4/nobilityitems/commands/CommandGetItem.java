@@ -39,7 +39,7 @@ public class CommandGetItem implements CommandExecutor {
             return true;
         }
 
-        player.getInventory().addItem(item.getItemStack());
+        player.getInventory().addItem(item.getItemStack(1));
 
         return true;
     }

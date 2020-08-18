@@ -30,13 +30,20 @@ public class NobilityItem {
         return internalName;
     }
 
+    public String getDisplayName() {
+        return displayName;
+    }
+
     /**
      * Gets the ItemStack represented by this NobilityItem
      * 
+     * @param amount int amount of the ItemStack
+     * 
      * @return ItemStack
      */
-    public ItemStack getItemStack() {
+    public ItemStack getItemStack(int amount) {
         ItemStack item = new ItemStack(material);
+        item.setAmount(amount);
         ItemMeta meta = NobilityItems.getInstance().getServer().getItemFactory().getItemMeta(material);
         meta.setDisplayName(displayName);
         if (customModelData > -1)
