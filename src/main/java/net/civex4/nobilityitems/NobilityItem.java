@@ -18,7 +18,7 @@ public class NobilityItem {
     private int customModelData;
     private List<String> lore;
 
-    protected NobilityItem(String id, String displayName, Material material, List<String> lore, int model) {
+    NobilityItem(String id, String displayName, Material material, List<String> lore, int model) {
         this.internalName = id;
         this.displayName = displayName;
         this.material = material;

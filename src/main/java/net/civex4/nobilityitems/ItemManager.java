@@ -16,7 +16,7 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-public class ItemManager {
+class ItemManager {
     private static Map<String, NobilityItem> items;
     private static Map<String, List<String>> tags;
     private static FileConfiguration tagsConfig;
@@ -24,7 +24,7 @@ public class ItemManager {
     private static FileConfiguration itemsConfig;
     private static List<FileConfiguration> configs;
 
-    protected static void init(File itemFolder, File tagsFile) {
+    static void init(File itemFolder, File tagsFile) {
         Bukkit.getLogger().info("Loading tags...");
         tags = new HashMap<>();
 
@@ -155,7 +155,7 @@ public class ItemManager {
         Bukkit.getLogger().info("Items Loaded!");
     }
 
-    protected static boolean makeItem(String internalName, ItemStack item) {
+    static boolean makeItem(String internalName, ItemStack item) {
         if (items.keySet().contains(internalName) || !item.hasItemMeta()) {
             return false;
         }
@@ -191,11 +191,11 @@ public class ItemManager {
         return true;
     }
 
-    protected static List<NobilityItem> getItems() {
+    static List<NobilityItem> getItems() {
         return new ArrayList<NobilityItem>(items.values());
     }
 
-    protected static NobilityItem getItemByDisplayName(String displayName) {
+    static NobilityItem getItemByDisplayName(String displayName) {
         for (NobilityItem item : items.values()) {
             if (item.getDisplayName().equals(displayName)) {
                 return item;
@@ -205,7 +205,7 @@ public class ItemManager {
         return null;
     }
 
-    protected static NobilityItem getItem(String internalName) {
+    static NobilityItem getItem(String internalName) {
         NobilityItem item = items.get(internalName);
 
         if (item == null) {
@@ -215,7 +215,7 @@ public class ItemManager {
         return item;
     }
 
-    protected static NobilityItem getItem(ItemStack itemStack) {
+    static NobilityItem getItem(ItemStack itemStack) {
         for (NobilityItem item : items.values()) {
             if (item.equals(itemStack)) {
                 return item;

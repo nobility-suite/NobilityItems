@@ -1,6 +1,7 @@
 package net.civex4.nobilityitems;
 
 import java.io.File;
+import java.util.List;
 
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -55,6 +56,15 @@ public class NobilityItems extends JavaPlugin {
      */
     public static NobilityItem getItem(ItemStack item) {
         return ItemManager.getItem(item);
+    }
+
+    /**
+     * Returns a List of all loaded NobilityItems
+     * 
+     * @return List<NobilityItem>
+     */
+    public static List<NobilityItem> getItems() {
+        return ItemManager.getItems();
     }
 
 }
