@@ -9,7 +9,6 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
-import org.w3c.dom.Text;
 
 import net.md_5.bungee.api.chat.BaseComponent;
 import net.md_5.bungee.api.chat.HoverEvent;
@@ -33,13 +32,15 @@ public class CommandListener implements CommandExecutor {
 
         if (args.length == 0) {
             sender.sendMessage(ChatColor.GREEN + "===" + pluginName + ChatColor.GREEN + "===");
-            sender.sendMessage(ChatColor.YELLOW + "/nobilityitems                     " 
+            sender.sendMessage(ChatColor.YELLOW + "/nobilityitems " 
                 + ChatColor.GREEN + "NobilityItems help");
-            sender.sendMessage(ChatColor.YELLOW + "/nobilityitems list                " 
+            sender.sendMessage(ChatColor.YELLOW + "/nobilityitems list " 
                 + ChatColor.GREEN + "lists all loaded NobilityItems");
+                sender.sendMessage(ChatColor.YELLOW + "/nobilityitems what " 
+                + ChatColor.GREEN + "says if the item being held is a NobilityItem");
             sender.sendMessage(ChatColor.YELLOW + "/nobilityitems get <name> (amount) " 
                 + ChatColor.GREEN + "gets a specified NobilityItem");
-            sender.sendMessage(ChatColor.YELLOW + "/nobilityitems create <name>       " 
+            sender.sendMessage(ChatColor.YELLOW + "/nobilityitems create <name> " 
                 + ChatColor.GREEN + "creates a NobilityItem");
             
             return true;
@@ -78,6 +79,33 @@ public class CommandListener implements CommandExecutor {
                 sender.spigot().sendMessage(message);
             }
 
+            return true;
+        } else if (args[0].equals("what")) {
+            if (args.length != 1) {
+                sender.sendMessage(ChatColor.RED + "Usage: /nobilityitems what");
+                return true;
+            }
+
+            if (player == null) {
+                sender.sendMessage(ChatColor.RED + "This command cannot be used from the console!");
+                return true;
+            }
+
+            ItemStack item = player.getInventory().getItemInMainHand();
+    
+            if (item == null) {
+                sender.sendMessage(ChatColor.RED + "You must have an item in your main hand!");
+                return true;
+            }
+
+            NobilityItem nItem = ItemManager.getItem(item);
+
+            if (nItem == null) {
+                sender.sendMessage(ChatColor.YELLOW + "You are not holding a NobilityItem!");
+                return true;
+            }
+
+            sender.sendMessage(ChatColor.YELLOW + "You are holding " + ChatColor.GREEN + nItem.getInternalName());
             return true;
         } else if (args[0].equals("get")) {
             if (args.length < 2 || args.length > 3) {

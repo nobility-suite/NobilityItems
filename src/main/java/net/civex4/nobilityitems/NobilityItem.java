@@ -28,7 +28,7 @@ public class NobilityItem {
         this.customModelData = model;
 
         hasLore = lore == null ? false : true;
-        hasCustomModelData = customModelData == -1 ? false : true;
+        hasCustomModelData = customModelData != -1;
     }
 
     public boolean hasLore() {

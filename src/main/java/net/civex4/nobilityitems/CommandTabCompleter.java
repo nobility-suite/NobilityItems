@@ -13,6 +13,7 @@ public class CommandTabCompleter implements TabCompleter {
 
     static {
         COMMANDS.add("list");
+        COMMANDS.add("what");
         COMMANDS.add("get");
         COMMANDS.add("create");
     }
