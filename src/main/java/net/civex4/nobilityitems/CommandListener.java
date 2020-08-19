@@ -1,11 +1,20 @@
 package net.civex4.nobilityitems;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.w3c.dom.Text;
+
+import net.md_5.bungee.api.chat.BaseComponent;
+import net.md_5.bungee.api.chat.HoverEvent;
+import net.md_5.bungee.api.chat.TextComponent;
+import net.md_5.bungee.api.chat.HoverEvent.Action;
 
 public class CommandListener implements CommandExecutor {
 
@@ -43,8 +52,30 @@ public class CommandListener implements CommandExecutor {
             sender.sendMessage(ChatColor.DARK_GREEN + "Loaded Nobilityitems:");
             
             for (NobilityItem item : ItemManager.getItems()) {
-                sender.sendMessage(ChatColor.GREEN + item.getInternalName() 
-                    + ChatColor.YELLOW + " (" + item.getDisplayName() + ChatColor.YELLOW + ")");
+                TextComponent message = new TextComponent(ChatColor.GREEN + item.getInternalName() + " ");
+                TextComponent displayName = new TextComponent(ChatColor.YELLOW + "(" + item.getDisplayName() + ChatColor.YELLOW + ")");
+
+                if (item.hasLore()) {
+                    List<BaseComponent> componentsList = new ArrayList<>();
+                    for (int i = 0; i < item.getLore().size(); i++) {
+                        if (i != item.getLore().size() - 1) {
+                            componentsList.add(new TextComponent(item.getLore().get(i) + "\n"));
+                        } else {
+                            componentsList.add(new TextComponent(item.getLore().get(i)));
+                        }
+                    }
+
+                    BaseComponent[] components = new BaseComponent[componentsList.size()];
+                    for (int i = 0; i < components.length; i++) {
+                        components[i] = componentsList.get(i);
+                    }
+
+                    displayName.setHoverEvent(new HoverEvent(Action.SHOW_TEXT, components));
+                }
+
+                message.addExtra(displayName);
+
+                sender.spigot().sendMessage(message);
             }
 
             return true;

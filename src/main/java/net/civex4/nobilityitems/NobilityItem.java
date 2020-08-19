@@ -17,6 +17,8 @@ public class NobilityItem {
     private Material material;
     private int customModelData;
     private List<String> lore;
+    private boolean hasLore;
+    private boolean hasCustomModelData;
 
     NobilityItem(String id, String displayName, Material material, List<String> lore, int model) {
         this.internalName = id;
@@ -24,6 +26,17 @@ public class NobilityItem {
         this.material = material;
         this.lore = lore;
         this.customModelData = model;
+
+        hasLore = lore == null ? false : true;
+        hasCustomModelData = customModelData == -1 ? false : true;
+    }
+
+    public boolean hasLore() {
+        return hasLore;
+    }
+
+    public boolean hasCustomModelData() {
+        return hasCustomModelData;
     }
 
     public String getInternalName() {
@@ -32,6 +45,10 @@ public class NobilityItem {
 
     public String getDisplayName() {
         return displayName;
+    }
+
+    public List<String> getLore() {
+        return lore;
     }
 
     /**
