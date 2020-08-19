@@ -14,6 +14,7 @@ public class NobilityItems extends JavaPlugin {
         instance = this;
 
         getCommand("nobilityitems").setExecutor(new CommandListener());
+        getCommand("nobilityitems").setTabCompleter(new CommandTabCompleter());
 
         ItemManager.init(new File(getDataFolder(), "items"), new File(getDataFolder(), "tags.yml"));
     }
