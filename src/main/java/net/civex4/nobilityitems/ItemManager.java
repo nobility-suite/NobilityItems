@@ -155,7 +155,7 @@ public class ItemManager {
         Bukkit.getLogger().info("Items Loaded!");
     }
 
-    public static boolean makeItem(String internalName, ItemStack item) {
+    protected static boolean makeItem(String internalName, ItemStack item) {
         if (items.keySet().contains(internalName) || !item.hasItemMeta()) {
             return false;
         }
@@ -191,11 +191,11 @@ public class ItemManager {
         return true;
     }
 
-    public static List<NobilityItem> getItems() {
+    protected static List<NobilityItem> getItems() {
         return new ArrayList<NobilityItem>(items.values());
     }
 
-    static NobilityItem getItemByDisplayName(String displayName) {
+    protected static NobilityItem getItemByDisplayName(String displayName) {
         for (NobilityItem item : items.values()) {
             if (item.getDisplayName().equals(displayName)) {
                 return item;
@@ -205,7 +205,7 @@ public class ItemManager {
         return null;
     }
 
-    static NobilityItem getItem(String internalName) {
+    protected static NobilityItem getItem(String internalName) {
         NobilityItem item = items.get(internalName);
 
         if (item == null) {
@@ -215,7 +215,7 @@ public class ItemManager {
         return item;
     }
 
-    static NobilityItem getItem(ItemStack itemStack) {
+    protected static NobilityItem getItem(ItemStack itemStack) {
         for (NobilityItem item : items.values()) {
             if (item.equals(itemStack)) {
                 return item;

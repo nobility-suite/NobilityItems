@@ -3,12 +3,7 @@ version: ${project.version}
 main: net.civex4.nobilityitems.NobilityItems
 api-version: 1.14
 commands:
-  niget:
-    description: Gets a NobilityItem and puts it in your hand
-    usage: /niget <item_name>
-  nilist:
-    description: Lists out all loaded NobilityItems
-    usage: /nilist
-  nicreate:
-    description: Creates a NobilityItem from the item in your hand
-    usage: /nicreate <item_name>
+  nobilityitems:
+    description: NobilityItems command
+    usage: /nobilityitems (argument) ([other stuff...])
+    aliases: [ni]

@@ -5,10 +5,6 @@ import java.io.File;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import net.civex4.nobilityitems.commands.CommandCreateItem;
-import net.civex4.nobilityitems.commands.CommandGetItem;
-import net.civex4.nobilityitems.commands.CommandListItems;
-
 public class NobilityItems extends JavaPlugin {
     private static NobilityItems instance;
 
@@ -16,9 +12,7 @@ public class NobilityItems extends JavaPlugin {
     public void onEnable() {
         instance = this;
 
-        getCommand("niget").setExecutor(new CommandGetItem());
-        getCommand("nilist").setExecutor(new CommandListItems());
-        getCommand("nicreate").setExecutor(new CommandCreateItem());
+        getCommand("nobilityitems").setExecutor(new CommandListener());
 
         ItemManager.init(new File(getDataFolder(), "items"), new File(getDataFolder(), "tags.yml"));
     }
