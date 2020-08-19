@@ -28,6 +28,19 @@ public class NobilityItems extends JavaPlugin {
     }
 
     /**
+     * Gets a NobilityItem from its DisplayName (what the
+     * ItemStack itself is called). If multiple items have
+     * the same display name this will just get the first
+     * one that matches.
+     * 
+     * @param displayName
+     * @return NobilityItem, null if no DisplayName matches
+     */
+    public static NobilityItem getItemByDisplayName(String displayName) {
+        return ItemManager.getItemByDisplayName(displayName);
+    }
+
+    /**
      * Gets a NobilityItem from its internal name (the one used
      * in the items.yml config section header). Throws an
      * IllegalArgumentException if the internal name does not

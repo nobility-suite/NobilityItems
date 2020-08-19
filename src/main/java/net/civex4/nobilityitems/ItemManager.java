@@ -195,7 +195,17 @@ public class ItemManager {
         return new ArrayList<NobilityItem>(items.values());
     }
 
-    public static NobilityItem getItem(String internalName) {
+    static NobilityItem getItemByDisplayName(String displayName) {
+        for (NobilityItem item : items.values()) {
+            if (item.getDisplayName().equals(displayName)) {
+                return item;
+            }
+        }
+
+        return null;
+    }
+
+    static NobilityItem getItem(String internalName) {
         NobilityItem item = items.get(internalName);
 
         if (item == null) {
@@ -205,7 +215,7 @@ public class ItemManager {
         return item;
     }
 
-    public static NobilityItem getItem(ItemStack itemStack) {
+    static NobilityItem getItem(ItemStack itemStack) {
         for (NobilityItem item : items.values()) {
             if (item.equals(itemStack)) {
                 return item;
