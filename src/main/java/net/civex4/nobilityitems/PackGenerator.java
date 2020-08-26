@@ -26,7 +26,6 @@ public class PackGenerator {
 
     private static File itemModelFolder;
     private static File itemTextureFolder;
-    private static InputStream nobilityItemTexture;
     private static Configuration config;
 
     private static void generateStructure() {
@@ -34,8 +33,6 @@ public class PackGenerator {
 
         NobilityItems.getInstance().saveResource("pack/pack.mcmeta", true);
         NobilityItems.getInstance().saveResource("pack/pack.png", true);
-
-        nobilityItemTexture = NobilityItems.getInstance().getResource("pack/default.png");
 
         itemModelFolder = new File(dataFolder, "pack/assets/minecraft/models/item");
         itemTextureFolder = new File(dataFolder, "pack/assets/minecraft/textures/item");
