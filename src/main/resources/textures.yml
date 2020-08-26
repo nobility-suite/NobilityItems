@@ -1,0 +1,1068 @@
+ACACIA_BOAT: 
+  parent: "item/generated"
+  layer0: "item/acacia_boat"
+ACACIA_DOOR: 
+  parent: "item/generated"
+  layer0: "item/acacia_door"
+ACACIA_SAPLING: 
+  parent: "item/generated"
+  layer0: "block/acacia_sapling"
+ACACIA_SIGN: 
+  parent: "item/generated"
+  layer0: "item/acacia_sign"
+ACTIVATOR_RAIL: 
+  parent: "item/generated"
+  layer0: "block/activator_rail"
+ALLIUM: 
+  parent: "item/generated"
+  layer0: "block/allium"
+APPLE: 
+  parent: "item/generated"
+  layer0: "item/apple"
+ARMOR_STAND: 
+  parent: "item/generated"
+  layer0: "item/armor_stand"
+ARROW: 
+  parent: "item/generated"
+  layer0: "item/arrow"
+AZURE_BLUET: 
+  parent: "item/generated"
+  layer0: "block/azure_bluet"
+BAKED_POTATO: 
+  parent: "item/generated"
+  layer0: "item/baked_potato"
+BARRIER: 
+  parent: "item/generated"
+  layer0: "item/barrier"
+BEEF: 
+  parent: "item/generated"
+  layer0: "item/beef"
+BEETROOT: 
+  parent: "item/generated"
+  layer0: "item/beetroot"
+BEETROOT_SEEDS: 
+  parent: "item/generated"
+  layer0: "item/beetroot_seeds"
+BEETROOT_SOUP: 
+  parent: "item/generated"
+  layer0: "item/beetroot_soup"
+BELL: 
+  parent: "item/generated"
+  layer0: "item/bell"
+BIRCH_BOAT: 
+  parent: "item/generated"
+  layer0: "item/birch_boat"
+BIRCH_DOOR: 
+  parent: "item/generated"
+  layer0: "item/birch_door"
+BIRCH_SAPLING: 
+  parent: "item/generated"
+  layer0: "block/birch_sapling"
+BIRCH_SIGN: 
+  parent: "item/generated"
+  layer0: "item/birch_sign"
+BLACK_DYE: 
+  parent: "item/generated"
+  layer0: "item/black_dye"
+BLACK_STAINED_GLASS_PANE: 
+  parent: "item/generated"
+  layer0: "block/black_stained_glass"
+BLAZE_POWDER: 
+  parent: "item/generated"
+  layer0: "item/blaze_powder"
+BLUE_DYE: 
+  parent: "item/generated"
+  layer0: "item/blue_dye"
+BLUE_ORCHID: 
+  parent: "item/generated"
+  layer0: "block/blue_orchid"
+BLUE_STAINED_GLASS_PANE: 
+  parent: "item/generated"
+  layer0: "block/blue_stained_glass"
+BONE_MEAL: 
+  parent: "item/generated"
+  layer0: "item/bone_meal"
+BOOK: 
+  parent: "item/generated"
+  layer0: "item/book"
+BOW: 
+  parent: "item/generated"
+  layer0: "item/bow"
+BOWL: 
+  parent: "item/generated"
+  layer0: "item/bowl"
+BRAIN_CORAL: 
+  parent: "item/generated"
+  layer0: "block/brain_coral"
+BRAIN_CORAL_FAN: 
+  parent: "item/generated"
+  layer0: "block/brain_coral_fan"
+BRAIN_CORAL_WALL_FAN: 
+  parent: "item/generated"
+  layer0: "block/brain_coral_fan"
+BREAD: 
+  parent: "item/generated"
+  layer0: "item/bread"
+BREWING_STAND: 
+  parent: "item/generated"
+  layer0: "item/brewing_stand"
+BRICK: 
+  parent: "item/generated"
+  layer0: "item/brick"
+BROWN_DYE: 
+  parent: "item/generated"
+  layer0: "item/brown_dye"
+BROWN_MUSHROOM: 
+  parent: "item/generated"
+  layer0: "block/brown_mushroom"
+BROWN_STAINED_GLASS_PANE: 
+  parent: "item/generated"
+  layer0: "block/brown_stained_glass"
+BUBBLE_CORAL: 
+  parent: "item/generated"
+  layer0: "block/bubble_coral"
+BUBBLE_CORAL_FAN: 
+  parent: "item/generated"
+  layer0: "block/bubble_coral_fan"
+BUBBLE_CORAL_WALL_FAN: 
+  parent: "item/generated"
+  layer0: "block/bubble_coral_fan"
+BUCKET: 
+  parent: "item/generated"
+  layer0: "item/bucket"
+CAKE: 
+  parent: "item/generated"
+  layer0: "item/cake"
+CAMPFIRE: 
+  parent: "item/generated"
+  layer0: "item/campfire"
+CARROT: 
+  parent: "item/generated"
+  layer0: "item/carrot"
+CAULDRON: 
+  parent: "item/generated"
+  layer0: "item/cauldron"
+CHAINMAIL_BOOTS: 
+  parent: "item/generated"
+  layer0: "item/chainmail_boots"
+CHAINMAIL_CHESTPLATE: 
+  parent: "item/generated"
+  layer0: "item/chainmail_chestplate"
+CHAINMAIL_HELMET: 
+  parent: "item/generated"
+  layer0: "item/chainmail_helmet"
+CHAINMAIL_LEGGINGS: 
+  parent: "item/generated"
+  layer0: "item/chainmail_leggings"
+CHARCOAL: 
+  parent: "item/generated"
+  layer0: "item/charcoal"
+CHEST_MINECART: 
+  parent: "item/generated"
+  layer0: "item/chest_minecart"
+CHICKEN: 
+  parent: "item/generated"
+  layer0: "item/chicken"
+CHORUS_FRUIT: 
+  parent: "item/generated"
+  layer0: "item/chorus_fruit"
+CLAY_BALL: 
+  parent: "item/generated"
+  layer0: "item/clay_ball"
+CLOCK: 
+  parent: "item/generated"
+  layer0: "item/clock_00"
+COAL: 
+  parent: "item/generated"
+  layer0: "item/coal"
+COBWEB: 
+  parent: "item/generated"
+  layer0: "block/cobweb"
+COCOA_BEANS: 
+  parent: "item/generated"
+  layer0: "item/cocoa_beans"
+COD: 
+  parent: "item/generated"
+  layer0: "item/cod"
+COD_BUCKET: 
+  parent: "item/generated"
+  layer0: "item/cod_bucket"
+COMMAND_BLOCK_MINECART: 
+  parent: "item/generated"
+  layer0: "item/command_block_minecart"
+COMPARATOR: 
+  parent: "item/generated"
+  layer0: "item/comparator"
+COMPASS: 
+  parent: "item/generated"
+  layer0: "item/compass_16"
+COOKED_BEEF: 
+  parent: "item/generated"
+  layer0: "item/cooked_beef"
+COOKED_CHICKEN: 
+  parent: "item/generated"
+  layer0: "item/cooked_chicken"
+COOKED_COD: 
+  parent: "item/generated"
+  layer0: "item/cooked_cod"
+COOKED_MUTTON: 
+  parent: "item/generated"
+  layer0: "item/cooked_mutton"
+COOKED_PORKCHOP: 
+  parent: "item/generated"
+  layer0: "item/cooked_porkchop"
+COOKED_RABBIT: 
+  parent: "item/generated"
+  layer0: "item/cooked_rabbit"
+COOKED_SALMON: 
+  parent: "item/generated"
+  layer0: "item/cooked_salmon"
+COOKIE: 
+  parent: "item/generated"
+  layer0: "item/cookie"
+CORNFLOWER: 
+  parent: "item/generated"
+  layer0: "block/cornflower"
+CREEPER_BANNER_PATTERN: 
+  parent: "item/generated"
+  layer0: "item/creeper_banner_pattern"
+CROSSBOW: 
+  parent: "item/generated"
+  layer0: "item/crossbow_standby"
+CYAN_DYE: 
+  parent: "item/generated"
+  layer0: "item/cyan_dye"
+CYAN_STAINED_GLASS_PANE: 
+  parent: "item/generated"
+  layer0: "block/cyan_stained_glass"
+DANDELION: 
+  parent: "item/generated"
+  layer0: "block/dandelion"
+DARK_OAK_BOAT: 
+  parent: "item/generated"
+  layer0: "item/dark_oak_boat"
+DARK_OAK_DOOR: 
+  parent: "item/generated"
+  layer0: "item/dark_oak_door"
+DARK_OAK_SAPLING: 
+  parent: "item/generated"
+  layer0: "block/dark_oak_sapling"
+DARK_OAK_SIGN: 
+  parent: "item/generated"
+  layer0: "item/dark_oak_sign"
+DEAD_BRAIN_CORAL: 
+  parent: "item/generated"
+  layer0: "block/dead_brain_coral"
+DEAD_BRAIN_CORAL_FAN: 
+  parent: "item/generated"
+  layer0: "block/dead_brain_coral_fan"
+DEAD_BRAIN_CORAL_WALL_FAN: 
+  parent: "item/generated"
+  layer0: "block/dead_brain_coral_fan"
+DEAD_BUBBLE_CORAL: 
+  parent: "item/generated"
+  layer0: "block/dead_bubble_coral"
+DEAD_BUBBLE_CORAL_FAN: 
+  parent: "item/generated"
+  layer0: "block/dead_bubble_coral_fan"
+DEAD_BUBBLE_CORAL_WALL_FAN: 
+  parent: "item/generated"
+  layer0: "block/dead_bubble_coral_fan"
+DEAD_BUSH: 
+  parent: "item/generated"
+  layer0: "block/dead_bush"
+DEAD_FIRE_CORAL: 
+  parent: "item/generated"
+  layer0: "block/dead_fire_coral"
+DEAD_FIRE_CORAL_FAN: 
+  parent: "item/generated"
+  layer0: "block/dead_fire_coral_fan"
+DEAD_FIRE_CORAL_WALL_FAN: 
+  parent: "item/generated"
+  layer0: "block/dead_fire_coral_fan"
+DEAD_HORN_CORAL: 
+  parent: "item/generated"
+  layer0: "block/dead_horn_coral"
+DEAD_HORN_CORAL_FAN: 
+  parent: "item/generated"
+  layer0: "block/dead_horn_coral_fan"
+DEAD_HORN_CORAL_WALL_FAN: 
+  parent: "item/generated"
+  layer0: "block/dead_horn_coral_fan"
+DEAD_TUBE_CORAL: 
+  parent: "item/generated"
+  layer0: "block/dead_tube_coral"
+DEAD_TUBE_CORAL_FAN: 
+  parent: "item/generated"
+  layer0: "block/dead_tube_coral_fan"
+DEAD_TUBE_CORAL_WALL_FAN: 
+  parent: "item/generated"
+  layer0: "block/dead_tube_coral_fan"
+DETECTOR_RAIL: 
+  parent: "item/generated"
+  layer0: "block/detector_rail"
+DIAMOND: 
+  parent: "item/generated"
+  layer0: "item/diamond"
+DIAMOND_BOOTS: 
+  parent: "item/generated"
+  layer0: "item/diamond_boots"
+DIAMOND_CHESTPLATE: 
+  parent: "item/generated"
+  layer0: "item/diamond_chestplate"
+DIAMOND_HELMET: 
+  parent: "item/generated"
+  layer0: "item/diamond_helmet"
+DIAMOND_HORSE_ARMOR: 
+  parent: "item/generated"
+  layer0: "item/diamond_horse_armor"
+DIAMOND_LEGGINGS: 
+  parent: "item/generated"
+  layer0: "item/diamond_leggings"
+DRAGON_BREATH: 
+  parent: "item/generated"
+  layer0: "item/dragon_breath"
+DRIED_KELP: 
+  parent: "item/generated"
+  layer0: "item/dried_kelp"
+EGG: 
+  parent: "item/generated"
+  layer0: "item/egg"
+ELYTRA: 
+  parent: "item/generated"
+  layer0: "item/elytra"
+EMERALD: 
+  parent: "item/generated"
+  layer0: "item/emerald"
+ENCHANTED_BOOK: 
+  parent: "item/generated"
+  layer0: "item/enchanted_book"
+ENCHANTED_GOLDEN_APPLE: 
+  parent: "item/generated"
+  layer0: "item/golden_apple"
+ENDER_EYE: 
+  parent: "item/generated"
+  layer0: "item/ender_eye"
+ENDER_PEARL: 
+  parent: "item/generated"
+  layer0: "item/ender_pearl"
+END_CRYSTAL: 
+  parent: "item/generated"
+  layer0: "item/end_crystal"
+EXPERIENCE_BOTTLE: 
+  parent: "item/generated"
+  layer0: "item/experience_bottle"
+FEATHER: 
+  parent: "item/generated"
+  layer0: "item/feather"
+FERMENTED_SPIDER_EYE: 
+  parent: "item/generated"
+  layer0: "item/fermented_spider_eye"
+FERN: 
+  parent: "item/generated"
+  layer0: "block/fern"
+FILLED_MAP: 
+  parent: "item/generated"
+  layer0: "item/filled_map"
+FIREWORK_ROCKET: 
+  parent: "item/generated"
+  layer0: "item/firework_rocket"
+FIREWORK_STAR: 
+  parent: "item/generated"
+  layer0: "item/firework_star"
+FIRE_CHARGE: 
+  parent: "item/generated"
+  layer0: "item/fire_charge"
+FIRE_CORAL: 
+  parent: "item/generated"
+  layer0: "block/fire_coral"
+FIRE_CORAL_FAN: 
+  parent: "item/generated"
+  layer0: "block/fire_coral_fan"
+FIRE_CORAL_WALL_FAN: 
+  parent: "item/generated"
+  layer0: "block/fire_coral_fan"
+FLINT: 
+  parent: "item/generated"
+  layer0: "item/flint"
+FLINT_AND_STEEL: 
+  parent: "item/generated"
+  layer0: "item/flint_and_steel"
+FLOWER_BANNER_PATTERN: 
+  parent: "item/generated"
+  layer0: "item/flower_banner_pattern"
+FLOWER_POT: 
+  parent: "item/generated"
+  layer0: "item/flower_pot"
+FURNACE_MINECART: 
+  parent: "item/generated"
+  layer0: "item/furnace_minecart"
+GHAST_TEAR: 
+  parent: "item/generated"
+  layer0: "item/ghast_tear"
+GLASS_BOTTLE: 
+  parent: "item/generated"
+  layer0: "item/glass_bottle"
+GLASS_PANE: 
+  parent: "item/generated"
+  layer0: "block/glass"
+GLISTERING_MELON_SLICE: 
+  parent: "item/generated"
+  layer0: "item/glistering_melon_slice"
+GLOBE_BANNER_PATTERN: 
+  parent: "item/generated"
+  layer0: "item/globe_banner_pattern"
+GLOWSTONE_DUST: 
+  parent: "item/generated"
+  layer0: "item/glowstone_dust"
+GOLDEN_APPLE: 
+  parent: "item/generated"
+  layer0: "item/golden_apple"
+GOLDEN_BOOTS: 
+  parent: "item/generated"
+  layer0: "item/golden_boots"
+GOLDEN_CARROT: 
+  parent: "item/generated"
+  layer0: "item/golden_carrot"
+GOLDEN_CHESTPLATE: 
+  parent: "item/generated"
+  layer0: "item/golden_chestplate"
+GOLDEN_HELMET: 
+  parent: "item/generated"
+  layer0: "item/golden_helmet"
+GOLDEN_HORSE_ARMOR: 
+  parent: "item/generated"
+  layer0: "item/golden_horse_armor"
+GOLDEN_LEGGINGS: 
+  parent: "item/generated"
+  layer0: "item/golden_leggings"
+GOLD_INGOT: 
+  parent: "item/generated"
+  layer0: "item/gold_ingot"
+GOLD_NUGGET: 
+  parent: "item/generated"
+  layer0: "item/gold_nugget"
+GRASS: 
+  parent: "item/generated"
+  layer0: "block/grass"
+GRAY_DYE: 
+  parent: "item/generated"
+  layer0: "item/gray_dye"
+GRAY_STAINED_GLASS_PANE: 
+  parent: "item/generated"
+  layer0: "block/gray_stained_glass"
+GREEN_DYE: 
+  parent: "item/generated"
+  layer0: "item/green_dye"
+GREEN_STAINED_GLASS_PANE: 
+  parent: "item/generated"
+  layer0: "block/green_stained_glass"
+GUNPOWDER: 
+  parent: "item/generated"
+  layer0: "item/gunpowder"
+HEART_OF_THE_SEA: 
+  parent: "item/generated"
+  layer0: "item/heart_of_the_sea"
+HOPPER: 
+  parent: "item/generated"
+  layer0: "item/hopper"
+HOPPER_MINECART: 
+  parent: "item/generated"
+  layer0: "item/hopper_minecart"
+HORN_CORAL: 
+  parent: "item/generated"
+  layer0: "block/horn_coral"
+HORN_CORAL_FAN: 
+  parent: "item/generated"
+  layer0: "block/horn_coral_fan"
+HORN_CORAL_WALL_FAN: 
+  parent: "item/generated"
+  layer0: "block/horn_coral_fan"
+INK_SAC: 
+  parent: "item/generated"
+  layer0: "item/ink_sac"
+IRON_BARS: 
+  parent: "item/generated"
+  layer0: "block/iron_bars"
+IRON_BOOTS: 
+  parent: "item/generated"
+  layer0: "item/iron_boots"
+IRON_CHESTPLATE: 
+  parent: "item/generated"
+  layer0: "item/iron_chestplate"
+IRON_DOOR: 
+  parent: "item/generated"
+  layer0: "item/iron_door"
+IRON_HELMET: 
+  parent: "item/generated"
+  layer0: "item/iron_helmet"
+IRON_HORSE_ARMOR: 
+  parent: "item/generated"
+  layer0: "item/iron_horse_armor"
+IRON_INGOT: 
+  parent: "item/generated"
+  layer0: "item/iron_ingot"
+IRON_LEGGINGS: 
+  parent: "item/generated"
+  layer0: "item/iron_leggings"
+IRON_NUGGET: 
+  parent: "item/generated"
+  layer0: "item/iron_nugget"
+ITEM_FRAME: 
+  parent: "item/generated"
+  layer0: "item/item_frame"
+JUNGLE_BOAT: 
+  parent: "item/generated"
+  layer0: "item/jungle_boat"
+JUNGLE_DOOR: 
+  parent: "item/generated"
+  layer0: "item/jungle_door"
+JUNGLE_SAPLING: 
+  parent: "item/generated"
+  layer0: "block/jungle_sapling"
+JUNGLE_SIGN: 
+  parent: "item/generated"
+  layer0: "item/jungle_sign"
+KELP: 
+  parent: "item/generated"
+  layer0: "item/kelp"
+KNOWLEDGE_BOOK: 
+  parent: "item/generated"
+  layer0: "item/knowledge_book"
+LADDER: 
+  parent: "item/generated"
+  layer0: "block/ladder"
+LANTERN: 
+  parent: "item/generated"
+  layer0: "item/lantern"
+LAPIS_LAZULI: 
+  parent: "item/generated"
+  layer0: "item/lapis_lazuli"
+LARGE_FERN: 
+  parent: "item/generated"
+  layer0: "block/large_fern_top"
+LAVA_BUCKET: 
+  parent: "item/generated"
+  layer0: "item/lava_bucket"
+LEAD: 
+  parent: "item/generated"
+  layer0: "item/lead"
+LEATHER: 
+  parent: "item/generated"
+  layer0: "item/leather"
+LEATHER_BOOTS: 
+  parent: "item/generated"
+  layer0: "item/leather_boots"
+LEATHER_CHESTPLATE: 
+  parent: "item/generated"
+  layer0: "item/leather_chestplate"
+LEATHER_HELMET: 
+  parent: "item/generated"
+  layer0: "item/leather_helmet"
+LEATHER_HORSE_ARMOR: 
+  parent: "item/generated"
+  layer0: "item/leather_horse_armor"
+LEATHER_LEGGINGS: 
+  parent: "item/generated"
+  layer0: "item/leather_leggings"
+LEVER: 
+  parent: "item/generated"
+  layer0: "block/lever"
+LIGHT_BLUE_DYE: 
+  parent: "item/generated"
+  layer0: "item/light_blue_dye"
+LIGHT_BLUE_STAINED_GLASS_PANE: 
+  parent: "item/generated"
+  layer0: "block/light_blue_stained_glass"
+LIGHT_GRAY_DYE: 
+  parent: "item/generated"
+  layer0: "item/light_gray_dye"
+LIGHT_GRAY_STAINED_GLASS_PANE: 
+  parent: "item/generated"
+  layer0: "block/light_gray_stained_glass"
+LILAC: 
+  parent: "item/generated"
+  layer0: "block/lilac_top"
+LILY_OF_THE_VALLEY: 
+  parent: "item/generated"
+  layer0: "block/lily_of_the_valley"
+LILY_PAD: 
+  parent: "item/generated"
+  layer0: "block/lily_pad"
+LIME_DYE: 
+  parent: "item/generated"
+  layer0: "item/lime_dye"
+LIME_STAINED_GLASS_PANE: 
+  parent: "item/generated"
+  layer0: "block/lime_stained_glass"
+LINGERING_POTION: 
+  parent: "item/generated"
+  layer0: "item/potion_overlay"
+MAGENTA_DYE: 
+  parent: "item/generated"
+  layer0: "item/magenta_dye"
+MAGENTA_STAINED_GLASS_PANE: 
+  parent: "item/generated"
+  layer0: "block/magenta_stained_glass"
+MAGMA_CREAM: 
+  parent: "item/generated"
+  layer0: "item/magma_cream"
+MAP: 
+  parent: "item/generated"
+  layer0: "item/map"
+MELON_SEEDS: 
+  parent: "item/generated"
+  layer0: "item/melon_seeds"
+MELON_SLICE: 
+  parent: "item/generated"
+  layer0: "item/melon_slice"
+MILK_BUCKET: 
+  parent: "item/generated"
+  layer0: "item/milk_bucket"
+MINECART: 
+  parent: "item/generated"
+  layer0: "item/minecart"
+MOJANG_BANNER_PATTERN: 
+  parent: "item/generated"
+  layer0: "item/mojang_banner_pattern"
+MUSHROOM_STEW: 
+  parent: "item/generated"
+  layer0: "item/mushroom_stew"
+MUSIC_DISC_11: 
+  parent: "item/generated"
+  layer0: "item/music_disc_11"
+MUSIC_DISC_13: 
+  parent: "item/generated"
+  layer0: "item/music_disc_13"
+MUSIC_DISC_BLOCKS: 
+  parent: "item/generated"
+  layer0: "item/music_disc_blocks"
+MUSIC_DISC_CAT: 
+  parent: "item/generated"
+  layer0: "item/music_disc_cat"
+MUSIC_DISC_CHIRP: 
+  parent: "item/generated"
+  layer0: "item/music_disc_chirp"
+MUSIC_DISC_FAR: 
+  parent: "item/generated"
+  layer0: "item/music_disc_far"
+MUSIC_DISC_MALL: 
+  parent: "item/generated"
+  layer0: "item/music_disc_mall"
+MUSIC_DISC_MELLOHI: 
+  parent: "item/generated"
+  layer0: "item/music_disc_mellohi"
+MUSIC_DISC_STAL: 
+  parent: "item/generated"
+  layer0: "item/music_disc_stal"
+MUSIC_DISC_STRAD: 
+  parent: "item/generated"
+  layer0: "item/music_disc_strad"
+MUSIC_DISC_WAIT: 
+  parent: "item/generated"
+  layer0: "item/music_disc_wait"
+MUSIC_DISC_WARD: 
+  parent: "item/generated"
+  layer0: "item/music_disc_ward"
+MUTTON: 
+  parent: "item/generated"
+  layer0: "item/mutton"
+NAME_TAG: 
+  parent: "item/generated"
+  layer0: "item/name_tag"
+NAUTILUS_SHELL: 
+  parent: "item/generated"
+  layer0: "item/nautilus_shell"
+NETHER_BRICK: 
+  parent: "item/generated"
+  layer0: "item/nether_brick"
+NETHER_STAR: 
+  parent: "item/generated"
+  layer0: "item/nether_star"
+NETHER_WART: 
+  parent: "item/generated"
+  layer0: "item/nether_wart"
+OAK_BOAT: 
+  parent: "item/generated"
+  layer0: "item/oak_boat"
+OAK_DOOR: 
+  parent: "item/generated"
+  layer0: "item/oak_door"
+OAK_SAPLING: 
+  parent: "item/generated"
+  layer0: "block/oak_sapling"
+OAK_SIGN: 
+  parent: "item/generated"
+  layer0: "item/oak_sign"
+ORANGE_DYE: 
+  parent: "item/generated"
+  layer0: "item/orange_dye"
+ORANGE_STAINED_GLASS_PANE: 
+  parent: "item/generated"
+  layer0: "block/orange_stained_glass"
+ORANGE_TULIP: 
+  parent: "item/generated"
+  layer0: "block/orange_tulip"
+OXEYE_DAISY: 
+  parent: "item/generated"
+  layer0: "block/oxeye_daisy"
+PAINTING: 
+  parent: "item/generated"
+  layer0: "item/painting"
+PAPER: 
+  parent: "item/generated"
+  layer0: "item/paper"
+PEONY: 
+  parent: "item/generated"
+  layer0: "block/peony_top"
+PHANTOM_MEMBRANE: 
+  parent: "item/generated"
+  layer0: "item/phantom_membrane"
+PINK_DYE: 
+  parent: "item/generated"
+  layer0: "item/pink_dye"
+PINK_STAINED_GLASS_PANE: 
+  parent: "item/generated"
+  layer0: "block/pink_stained_glass"
+PINK_TULIP: 
+  parent: "item/generated"
+  layer0: "block/pink_tulip"
+POISONOUS_POTATO: 
+  parent: "item/generated"
+  layer0: "item/poisonous_potato"
+POPPED_CHORUS_FRUIT: 
+  parent: "item/generated"
+  layer0: "item/popped_chorus_fruit"
+POPPY: 
+  parent: "item/generated"
+  layer0: "block/poppy"
+PORKCHOP: 
+  parent: "item/generated"
+  layer0: "item/porkchop"
+POTATO: 
+  parent: "item/generated"
+  layer0: "item/potato"
+POTION: 
+  parent: "item/generated"
+  layer0: "item/potion_overlay"
+POWERED_RAIL: 
+  parent: "item/generated"
+  layer0: "block/powered_rail"
+PRISMARINE_CRYSTALS: 
+  parent: "item/generated"
+  layer0: "item/prismarine_crystals"
+PRISMARINE_SHARD: 
+  parent: "item/generated"
+  layer0: "item/prismarine_shard"
+PUFFERFISH: 
+  parent: "item/generated"
+  layer0: "item/pufferfish"
+PUFFERFISH_BUCKET: 
+  parent: "item/generated"
+  layer0: "item/pufferfish_bucket"
+PUMPKIN_PIE: 
+  parent: "item/generated"
+  layer0: "item/pumpkin_pie"
+PUMPKIN_SEEDS: 
+  parent: "item/generated"
+  layer0: "item/pumpkin_seeds"
+PURPLE_DYE: 
+  parent: "item/generated"
+  layer0: "item/purple_dye"
+PURPLE_STAINED_GLASS_PANE: 
+  parent: "item/generated"
+  layer0: "block/purple_stained_glass"
+QUARTZ: 
+  parent: "item/generated"
+  layer0: "item/quartz"
+RABBIT: 
+  parent: "item/generated"
+  layer0: "item/rabbit"
+RABBIT_FOOT: 
+  parent: "item/generated"
+  layer0: "item/rabbit_foot"
+RABBIT_HIDE: 
+  parent: "item/generated"
+  layer0: "item/rabbit_hide"
+RABBIT_STEW: 
+  parent: "item/generated"
+  layer0: "item/rabbit_stew"
+RAIL: 
+  parent: "item/generated"
+  layer0: "block/rail"
+REDSTONE: 
+  parent: "item/generated"
+  layer0: "item/redstone"
+REDSTONE_TORCH: 
+  parent: "item/generated"
+  layer0: "block/redstone_torch"
+RED_DYE: 
+  parent: "item/generated"
+  layer0: "item/red_dye"
+RED_MUSHROOM: 
+  parent: "item/generated"
+  layer0: "block/red_mushroom"
+RED_STAINED_GLASS_PANE: 
+  parent: "item/generated"
+  layer0: "block/red_stained_glass"
+RED_TULIP: 
+  parent: "item/generated"
+  layer0: "block/red_tulip"
+REPEATER: 
+  parent: "item/generated"
+  layer0: "item/repeater"
+ROSE_BUSH: 
+  parent: "item/generated"
+  layer0: "block/rose_bush_top"
+ROTTEN_FLESH: 
+  parent: "item/generated"
+  layer0: "item/rotten_flesh"
+SADDLE: 
+  parent: "item/generated"
+  layer0: "item/saddle"
+SALMON: 
+  parent: "item/generated"
+  layer0: "item/salmon"
+SALMON_BUCKET: 
+  parent: "item/generated"
+  layer0: "item/salmon_bucket"
+SCUTE: 
+  parent: "item/generated"
+  layer0: "item/scute"
+SEAGRASS: 
+  parent: "item/generated"
+  layer0: "item/seagrass"
+SEA_PICKLE: 
+  parent: "item/generated"
+  layer0: "item/sea_pickle"
+SHEARS: 
+  parent: "item/generated"
+  layer0: "item/shears"
+SHULKER_SHELL: 
+  parent: "item/generated"
+  layer0: "item/shulker_shell"
+SKULL_BANNER_PATTERN: 
+  parent: "item/generated"
+  layer0: "item/skull_banner_pattern"
+SLIME_BALL: 
+  parent: "item/generated"
+  layer0: "item/slime_ball"
+SNOWBALL: 
+  parent: "item/generated"
+  layer0: "item/snowball"
+SPECTRAL_ARROW: 
+  parent: "item/generated"
+  layer0: "item/spectral_arrow"
+SPIDER_EYE: 
+  parent: "item/generated"
+  layer0: "item/spider_eye"
+SPLASH_POTION: 
+  parent: "item/generated"
+  layer0: "item/potion_overlay"
+SPRUCE_BOAT: 
+  parent: "item/generated"
+  layer0: "item/spruce_boat"
+SPRUCE_DOOR: 
+  parent: "item/generated"
+  layer0: "item/spruce_door"
+SPRUCE_SAPLING: 
+  parent: "item/generated"
+  layer0: "block/spruce_sapling"
+SPRUCE_SIGN: 
+  parent: "item/generated"
+  layer0: "item/spruce_sign"
+STRING: 
+  parent: "item/generated"
+  layer0: "item/string"
+STRUCTURE_VOID: 
+  parent: "item/generated"
+  layer0: "item/structure_void"
+SUGAR: 
+  parent: "item/generated"
+  layer0: "item/sugar"
+SUGAR_CANE: 
+  parent: "item/generated"
+  layer0: "item/sugar_cane"
+SUNFLOWER: 
+  parent: "item/generated"
+  layer0: "block/sunflower_front"
+SUSPICIOUS_STEW: 
+  parent: "item/generated"
+  layer0: "item/suspicious_stew"
+SWEET_BERRIES: 
+  parent: "item/generated"
+  layer0: "item/sweet_berries"
+TALL_GRASS: 
+  parent: "item/generated"
+  layer0: "block/tall_grass_top"
+TIPPED_ARROW: 
+  parent: "item/generated"
+  layer0: "item/tipped_arrow_head"
+TNT_MINECART: 
+  parent: "item/generated"
+  layer0: "item/tnt_minecart"
+TORCH: 
+  parent: "item/generated"
+  layer0: "block/torch"
+TOTEM_OF_UNDYING: 
+  parent: "item/generated"
+  layer0: "item/totem_of_undying"
+TRIDENT: 
+  parent: "item/generated"
+  layer0: "item/trident"
+TRIPWIRE_HOOK: 
+  parent: "item/generated"
+  layer0: "block/tripwire_hook"
+TROPICAL_FISH: 
+  parent: "item/generated"
+  layer0: "item/tropical_fish"
+TROPICAL_FISH_BUCKET: 
+  parent: "item/generated"
+  layer0: "item/tropical_fish_bucket"
+TUBE_CORAL: 
+  parent: "item/generated"
+  layer0: "block/tube_coral"
+TUBE_CORAL_FAN: 
+  parent: "item/generated"
+  layer0: "block/tube_coral_fan"
+TUBE_CORAL_WALL_FAN: 
+  parent: "item/generated"
+  layer0: "block/tube_coral_fan"
+TURTLE_EGG: 
+  parent: "item/generated"
+  layer0: "item/turtle_egg"
+TURTLE_HELMET: 
+  parent: "item/generated"
+  layer0: "item/turtle_helmet"
+VINE: 
+  parent: "item/generated"
+  layer0: "block/vine"
+WATER_BUCKET: 
+  parent: "item/generated"
+  layer0: "item/water_bucket"
+WHEAT: 
+  parent: "item/generated"
+  layer0: "item/wheat"
+WHEAT_SEEDS: 
+  parent: "item/generated"
+  layer0: "item/wheat_seeds"
+WHITE_DYE: 
+  parent: "item/generated"
+  layer0: "item/white_dye"
+WHITE_STAINED_GLASS_PANE: 
+  parent: "item/generated"
+  layer0: "block/white_stained_glass"
+WHITE_TULIP: 
+  parent: "item/generated"
+  layer0: "block/white_tulip"
+WITHER_ROSE: 
+  parent: "item/generated"
+  layer0: "block/wither_rose"
+WRITABLE_BOOK: 
+  parent: "item/generated"
+  layer0: "item/writable_book"
+WRITTEN_BOOK: 
+  parent: "item/generated"
+  layer0: "item/written_book"
+YELLOW_DYE: 
+  parent: "item/generated"
+  layer0: "item/yellow_dye"
+YELLOW_STAINED_GLASS_PANE: 
+  parent: "item/generated"
+  layer0: "block/yellow_stained_glass"
+BAMBOO: 
+  parent: "item/handheld"
+  layer0: "item/bamboo"
+BLAZE_ROD: 
+  parent: "item/handheld"
+  layer0: "item/blaze_rod"
+BONE: 
+  parent: "item/handheld"
+  layer0: "item/bone"
+DEBUG_STICK: 
+  parent: "item/handheld"
+  layer0: "item/stick"
+DIAMOND_AXE: 
+  parent: "item/handheld"
+  layer0: "item/diamond_axe"
+DIAMOND_HOE: 
+  parent: "item/handheld"
+  layer0: "item/diamond_hoe"
+DIAMOND_PICKAXE: 
+  parent: "item/handheld"
+  layer0: "item/diamond_pickaxe"
+DIAMOND_SHOVEL: 
+  parent: "item/handheld"
+  layer0: "item/diamond_shovel"
+DIAMOND_SWORD: 
+  parent: "item/handheld"
+  layer0: "item/diamond_sword"
+GOLDEN_AXE: 
+  parent: "item/handheld"
+  layer0: "item/golden_axe"
+GOLDEN_HOE: 
+  parent: "item/handheld"
+  layer0: "item/golden_hoe"
+GOLDEN_PICKAXE: 
+  parent: "item/handheld"
+  layer0: "item/golden_pickaxe"
+GOLDEN_SHOVEL: 
+  parent: "item/handheld"
+  layer0: "item/golden_shovel"
+GOLDEN_SWORD: 
+  parent: "item/handheld"
+  layer0: "item/golden_sword"
+IRON_AXE: 
+  parent: "item/handheld"
+  layer0: "item/iron_axe"
+IRON_HOE: 
+  parent: "item/handheld"
+  layer0: "item/iron_hoe"
+IRON_PICKAXE: 
+  parent: "item/handheld"
+  layer0: "item/iron_pickaxe"
+IRON_SHOVEL: 
+  parent: "item/handheld"
+  layer0: "item/iron_shovel"
+IRON_SWORD: 
+  parent: "item/handheld"
+  layer0: "item/iron_sword"
+STICK: 
+  parent: "item/handheld"
+  layer0: "item/stick"
+STONE_AXE: 
+  parent: "item/handheld"
+  layer0: "item/stone_axe"
+STONE_HOE: 
+  parent: "item/handheld"
+  layer0: "item/stone_hoe"
+STONE_PICKAXE: 
+  parent: "item/handheld"
+  layer0: "item/stone_pickaxe"
+STONE_SHOVEL: 
+  parent: "item/handheld"
+  layer0: "item/stone_shovel"
+STONE_SWORD: 
+  parent: "item/handheld"
+  layer0: "item/stone_sword"
+WOODEN_AXE: 
+  parent: "item/handheld"
+  layer0: "item/wooden_axe"
+WOODEN_HOE: 
+  parent: "item/handheld"
+  layer0: "item/wooden_hoe"
+WOODEN_PICKAXE: 
+  parent: "item/handheld"
+  layer0: "item/wooden_pickaxe"
+WOODEN_SHOVEL: 
+  parent: "item/handheld"
+  layer0: "item/wooden_shovel"
+WOODEN_SWORD: 
+  parent: "item/handheld"
+  layer0: "item/wooden_sword"
+CARROT_ON_A_STICK: 
+  parent: "item/handheld_rod"
+  layer0: "item/carrot_on_a_stick"
+FISHING_ROD: 
+  parent: "item/handheld_rod"
+  layer0: "item/fishing_rod"

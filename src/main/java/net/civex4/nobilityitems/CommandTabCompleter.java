@@ -16,6 +16,7 @@ public class CommandTabCompleter implements TabCompleter {
         COMMANDS.add("what");
         COMMANDS.add("get");
         COMMANDS.add("create");
+        COMMANDS.add("generate");
     }
 
     @Override

@@ -47,6 +47,14 @@ public class NobilityItem {
         return displayName;
     }
 
+    public int getCustomModelData() {
+        return customModelData;
+    }
+
+    public Material getMaterial() {
+        return material;
+    }
+
     public List<String> getLore() {
         return lore;
     }

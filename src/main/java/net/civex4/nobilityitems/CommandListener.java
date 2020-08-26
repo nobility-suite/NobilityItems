@@ -42,6 +42,8 @@ public class CommandListener implements CommandExecutor {
                 + ChatColor.GREEN + "gets a specified NobilityItem");
             sender.sendMessage(ChatColor.YELLOW + "/nobilityitems create <name> " 
                 + ChatColor.GREEN + "creates a NobilityItem");
+            sender.sendMessage(ChatColor.YELLOW + "/nobilityitems generate " 
+                + ChatColor.GREEN + "generates a resourcepack for all items with CustomModelData");
             
             return true;
         } else if (args[0].equals("list")) {
@@ -179,6 +181,15 @@ public class CommandListener implements CommandExecutor {
     
             sender.sendMessage(ChatColor.YELLOW + "Created " + args[0] + " item!");
     
+            return true;
+        } else if (args[0].equals("generate")) {
+            if (args.length != 1) {
+                sender.sendMessage(ChatColor.RED + "Usage: /nobilityitems generate");
+                return true;
+            }
+
+            PackGenerator.generate();
+            sender.sendMessage(ChatColor.YELLOW + "Pack Generated! Check the NobilityItems config folder.");
             return true;
         }
 
