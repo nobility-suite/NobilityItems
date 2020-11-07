@@ -3,6 +3,7 @@ package net.civex4.nobilityitems;
 import java.io.File;
 import java.util.List;
 
+import org.bukkit.command.PluginCommand;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -13,8 +14,10 @@ public class NobilityItems extends JavaPlugin {
     public void onEnable() {
         instance = this;
 
-        getCommand("nobilityitems").setExecutor(new CommandListener());
-        getCommand("nobilityitems").setTabCompleter(new CommandTabCompleter());
+        PluginCommand nobilityCommand = getCommand("nobilityitems");
+        assert nobilityCommand != null;
+        nobilityCommand.setExecutor(new CommandListener());
+        nobilityCommand.setTabCompleter(new CommandTabCompleter());
 
         ItemManager.init(new File(getDataFolder(), "items"), new File(getDataFolder(), "tags.yml"));
     }
@@ -29,7 +32,7 @@ public class NobilityItems extends JavaPlugin {
      * the same display name this will just get the first
      * one that matches.
      * 
-     * @param displayName
+     * @param displayName The display name
      * @return NobilityItem, null if no DisplayName matches
      */
     public static NobilityItem getItemByDisplayName(String displayName) {

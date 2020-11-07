@@ -3,3 +3,7 @@ target/*
 .vscode/*
 .classpath
 .project
+.idea/
+*.iml
+*.ipr
+*.iws
