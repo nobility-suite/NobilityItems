@@ -4,6 +4,8 @@ import java.io.File;
 import java.util.Collections;
 import java.util.List;
 
+import com.comphenix.protocol.ProtocolLibrary;
+import com.comphenix.protocol.ProtocolManager;
 import org.bukkit.block.data.BlockData;
 import org.bukkit.command.PluginCommand;
 import org.bukkit.inventory.ItemStack;
@@ -11,18 +13,35 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class NobilityItems extends JavaPlugin {
     private static NobilityItems instance;
+    static boolean debugPacks = Boolean.getBoolean("nobilityitems.debugPacks");
+    static ProtocolManager protocolManager;
 
     @Override
     public void onEnable() {
         instance = this;
+
+        protocolManager = ProtocolLibrary.getProtocolManager();
+
+        if (debugPacks) {
+            PackServer.start();
+        }
 
         PluginCommand nobilityCommand = getCommand("nobilityitems");
         assert nobilityCommand != null;
         nobilityCommand.setExecutor(new CommandListener());
         nobilityCommand.setTabCompleter(new CommandTabCompleter());
 
+        getServer().getPluginManager().registerEvents(new PlayerListener(), this);
+
         ItemManager.init(new File(getDataFolder(), "items"), new File(getDataFolder(), "tags.yml"));
         BlockManager.init();
+    }
+
+    @Override
+    public void onDisable() {
+        if (debugPacks) {
+            PackServer.stop();
+        }
     }
 
     protected static NobilityItems getInstance() {

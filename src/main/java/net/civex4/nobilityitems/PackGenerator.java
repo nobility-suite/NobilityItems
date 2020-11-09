@@ -3,6 +3,7 @@ package net.civex4.nobilityitems;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.UncheckedIOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -15,6 +16,9 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipOutputStream;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -191,6 +195,28 @@ public class PackGenerator {
         overwrite(blockstatesFolder.resolve(blockName + ".json"), GSON.toJson(blockstate));
     }
 
+    private static void makeZip() throws IOException {
+        Path p = NobilityItems.getInstance().getDataFolder().toPath().resolve("pack.zip");
+        Files.deleteIfExists(p);
+        Files.createFile(p);
+        Path pp = NobilityItems.getInstance().getDataFolder().toPath().resolve("pack");
+        try (ZipOutputStream zs = new ZipOutputStream(Files.newOutputStream(p));
+             Stream<Path> paths = Files.walk(pp)) {
+            paths
+                    .filter(path -> !Files.isDirectory(path))
+                    .forEach(path -> {
+                        ZipEntry zipEntry = new ZipEntry(pp.relativize(path).toString());
+                        try {
+                            zs.putNextEntry(zipEntry);
+                            Files.copy(path, zs);
+                            zs.closeEntry();
+                        } catch (IOException e) {
+                            throw new UncheckedIOException(e);
+                        }
+                    });
+        }
+    }
+
     public static void generate() throws IOException {
         if (!grabItems() & !grabBlocks()) {
             return;
@@ -289,6 +315,8 @@ public class PackGenerator {
                 }
             }
         }
+
+        makeZip();
     }
 
     @SuppressWarnings({"unused", "MismatchedQueryAndUpdateOfCollection"})

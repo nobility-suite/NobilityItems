@@ -206,6 +206,11 @@ public class CommandListener implements CommandExecutor {
                 sender.sendMessage(ChatColor.RED + "Packed failed to generate! Check log for details.");
                 e.printStackTrace();
             }
+
+            if (NobilityItems.debugPacks && player != null) {
+                PackServer.sendPack(player);
+            }
+
             return true;
         } else if (args[0].equals("listblocks")) {
             if (args.length > 1) {
