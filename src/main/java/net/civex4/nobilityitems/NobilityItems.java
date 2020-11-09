@@ -33,6 +33,10 @@ public class NobilityItems extends JavaPlugin {
 
         getServer().getPluginManager().registerEvents(new PlayerListener(), this);
 
+        reload();
+    }
+
+    void reload() {
         ItemManager.init(new File(getDataFolder(), "items"), new File(getDataFolder(), "tags.yml"));
         BlockManager.init();
     }

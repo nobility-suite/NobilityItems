@@ -53,8 +53,10 @@ public class CommandListener implements CommandExecutor {
                 + ChatColor.GREEN + "lists all loaded NobilityBlocks");
             sender.sendMessage(ChatColor.YELLOW + "/nobilityitems createblock <name> <unobtainable-block> [has-item] "
                 + ChatColor.GREEN + "creates a NobilityBlock");
-            sender.sendMessage(ChatColor.YELLOW + "/nobilityitems setblock <x> <y> <z> <name>"
+            sender.sendMessage(ChatColor.YELLOW + "/nobilityitems setblock <x> <y> <z> <name> "
                 + ChatColor.GREEN + "sets a NobilityBlock in the world");
+            sender.sendMessage(ChatColor.YELLOW + "/nobilityitems reload"
+                + ChatColor.GREEN + "reloads nobility block and item config from the yml files");
             
             return true;
         } else if (args[0].equals("list")) {
@@ -322,6 +324,10 @@ public class CommandListener implements CommandExecutor {
 
             sender.sendMessage(ChatColor.YELLOW + "Placed NobilityBlock " + internalName);
 
+            return true;
+        } else if (args[0].equals("reload")) {
+            NobilityItems.getInstance().reload();
+            sender.sendMessage(ChatColor.YELLOW + "Reloaded NobilityItems");
             return true;
         }
 

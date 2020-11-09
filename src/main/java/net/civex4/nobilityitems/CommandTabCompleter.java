@@ -25,6 +25,7 @@ public class CommandTabCompleter implements TabCompleter {
         COMMANDS.add("listblocks");
         COMMANDS.add("createblock");
         COMMANDS.add("setblock");
+        COMMANDS.add("reload");
     }
 
     @Override
