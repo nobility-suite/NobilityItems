@@ -3,7 +3,7 @@ package net.civex4.nobilityitems;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -61,20 +61,31 @@ class ItemManager {
 
         Bukkit.getLogger().info("Loading Items...");
 
-        List<File> files = new ArrayList<>(Arrays.asList(itemFolder.listFiles()));
+        File[] fileArray = itemFolder.listFiles();
+        List<File> files;
+        if (fileArray == null) {
+            files = new ArrayList<>(0);
+        } else {
+            files = new ArrayList<>(fileArray.length);
+            Collections.addAll(files, fileArray);
+        }
         configs = new ArrayList<>();
 
         for (int i = 0; i < files.size(); i++) {
-            if (files.get(i).isDirectory()) {
-                files.addAll(Arrays.asList(files.get(i).listFiles()));
+            File file = files.get(i);
+            if (file.isDirectory()) {
+                File[] children = file.listFiles();
+                if (children != null) {
+                    Collections.addAll(files, children);
+                }
             } else {
                 try {
-                    if (files.get(i).getName().equals("items.yml")) {
-                        itemsConfig = YamlConfiguration.loadConfiguration(files.get(i));
+                    if (file.getName().equals("items.yml")) {
+                        itemsConfig = YamlConfiguration.loadConfiguration(file);
                     }
-                    configs.add(YamlConfiguration.loadConfiguration(files.get(i)));
+                    configs.add(YamlConfiguration.loadConfiguration(file));
                 } catch (IllegalArgumentException e) {
-                    Bukkit.getLogger().severe("Failed to load " + files.get(i).getName() + "!");
+                    Bukkit.getLogger().severe("Failed to load " + file.getName() + "!");
                     e.printStackTrace();
                 }
             }
@@ -84,15 +95,16 @@ class ItemManager {
         for (FileConfiguration config : configs) {
             for (String internalName : config.getKeys(false)) {
                 ConfigurationSection itemConfig = config.getConfigurationSection(internalName);
-                String displayName = null;
+                if (itemConfig == null) continue;
                 Material material = null;
                 List<String> lore = null;
                 int model = -1;
 
                 boolean cont = false;
 
-                if (itemConfig.isString("display_name")) {
-                    displayName = itemConfig.getString("display_name").replace('&', '§');
+                String displayName = itemConfig.getString("display_name");
+                if (displayName != null) {
+                    displayName = displayName.replace('&', '§');
                 } else {
                     Bukkit.getLogger().severe(itemConfig.getCurrentPath() + " has no display_name!");
                     cont = true;
@@ -156,13 +168,13 @@ class ItemManager {
     }
 
     static boolean makeItem(String internalName, ItemStack item) {
-        if (items.keySet().contains(internalName) || !item.hasItemMeta()) {
+        if (items.containsKey(internalName) || !item.hasItemMeta()) {
             return false;
         }
 
         ItemMeta meta = item.getItemMeta();
 
-        if (!meta.hasDisplayName()) {
+        if (meta == null || !meta.hasDisplayName()) {
             return false;
         }
 
@@ -192,7 +204,7 @@ class ItemManager {
     }
 
     static List<NobilityItem> getItems() {
-        return new ArrayList<NobilityItem>(items.values());
+        return new ArrayList<>(items.values());
     }
 
     static NobilityItem getItemByDisplayName(String displayName) {
@@ -217,7 +229,7 @@ class ItemManager {
 
     static NobilityItem getItem(ItemStack itemStack) {
         for (NobilityItem item : items.values()) {
-            if (item.equals(itemStack)) {
+            if (item.equalsStack(itemStack)) {
                 return item;
             }
         }

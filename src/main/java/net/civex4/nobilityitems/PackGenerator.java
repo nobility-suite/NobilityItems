@@ -1,20 +1,18 @@
 package net.civex4.nobilityitems;
 
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.OutputStream;
 import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.nio.file.StandardOpenOption;
+import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.configuration.Configuration;
@@ -22,26 +20,32 @@ import org.bukkit.configuration.file.YamlConfiguration;
 
 public class PackGenerator {
 
+    private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
+
     private static Map<Material, List<NobilityItem>> items;
 
-    private static File itemModelFolder;
-    private static File itemTextureFolder;
+    private static Path itemModelFolder;
+    private static Path itemTextureFolder;
     private static Configuration config;
 
-    private static void generateStructure() {
-        File dataFolder = NobilityItems.getInstance().getDataFolder();
+    private static void generateStructure() throws IOException {
+        Path dataFolder = NobilityItems.getInstance().getDataFolder().toPath();
 
         NobilityItems.getInstance().saveResource("pack/pack.mcmeta", true);
         NobilityItems.getInstance().saveResource("pack/pack.png", true);
 
-        itemModelFolder = new File(dataFolder, "pack/assets/minecraft/models/item");
-        itemTextureFolder = new File(dataFolder, "pack/assets/minecraft/textures/item");
+        itemModelFolder = dataFolder.resolve("pack/assets/minecraft/models/item");
+        itemTextureFolder = dataFolder.resolve("pack/assets/minecraft/textures/item");
 
-        itemModelFolder.mkdirs();
-        itemTextureFolder.mkdirs();
+        Files.createDirectories(itemModelFolder);
+        Files.createDirectories(itemTextureFolder);
 
-        Arrays.asList(itemModelFolder.listFiles()).forEach(file -> file.delete());
-        Arrays.asList(itemTextureFolder.listFiles()).forEach(file -> file.delete());
+        for (Path child : (Iterable<Path>) Files.list(itemModelFolder)::iterator) {
+            Files.deleteIfExists(child);
+        }
+        for (Path child : (Iterable<Path>) Files.list(itemTextureFolder)::iterator) {
+            Files.deleteIfExists(child);
+        }
     }
 
     private static boolean grabItems() {
@@ -60,24 +64,27 @@ public class PackGenerator {
         return items.keySet().size() > 0;
     }
 
-    private static void overwrite(File file, String string) {
-        file.delete();
+    private static void overwrite(Path file, String string) {
         try {
-            Files.write(Paths.get(file.getPath()), string.getBytes(), StandardOpenOption.CREATE);
+            Files.write(file, string.getBytes());
         } catch (IOException e) {
-            Bukkit.getLogger().severe("Failed to write to file: " + file.getName());
+            Bukkit.getLogger().severe("Failed to write to file: " + file.getFileName());
             e.printStackTrace();
         }
     }
 
-    public static void generate() {
+    public static void generate() throws IOException {
         if (!grabItems()) {
             return;
         }
 
         generateStructure();
 
-        InputStreamReader reader = new InputStreamReader(NobilityItems.getInstance().getResource("textures.yml"));
+        InputStream texturesYml = NobilityItems.getInstance().getResource("textures.yml");
+        if (texturesYml == null) {
+            throw new IOException("Could not find textures.yml");
+        }
+        InputStreamReader reader = new InputStreamReader(texturesYml);
         config = YamlConfiguration.loadConfiguration(reader);
 
         for (Material type : items.keySet()) {
@@ -88,55 +95,67 @@ public class PackGenerator {
 
             String materialKey = type.name();
 
-            File file = new File(itemModelFolder, materialKey.toLowerCase() + ".json");
-
-            if (file.exists()) {
-                file.delete();
-            }
-
-            try {
-                file.createNewFile();
-            } catch (IOException e) {
-                Bukkit.getLogger().severe("Unable to create file " + file.getName() + " in models/item folder");
-                e.printStackTrace();
-                continue;
-            }
+            Path file = itemModelFolder.resolve(materialKey.toLowerCase() + ".json");
 
             String parent = config.getString(materialKey + ".parent");
-            String layer0 = config.getString(materialKey + ".layer0");
 
-            String toWrite = "{\n\t\"parent\": \"" + parent + "\",\n\t\"textures\": {\n\t\t\"layer0\": \"" + layer0 + "\"\n\t},\n\t\"overrides\": [";
+            ItemModel toWrite = new ItemModel();
+            toWrite.parent = parent;
+            toWrite.textures = new ItemModel.Textures();
+            toWrite.textures.layer0 = config.getString(materialKey + ".layer0");
+            toWrite.overrides = new ArrayList<>();
 
             for (NobilityItem item : items.get(type)) {
-                File itemModelFile = new File(itemModelFolder, item.getInternalName() + ".json");
-                String itemModelFileText = "{ \"parent\": \"" + parent
-                    + "\", \"textures\": { \"layer0\": \"item/" + item.getInternalName() + "\" } }";
-                overwrite(itemModelFile, itemModelFileText);
+                Path itemModelFile = itemModelFolder.resolve(item.getInternalName() + ".json");
+                ItemModel itemModel = new ItemModel();
+                itemModel.parent = parent;
+                itemModel.textures = new ItemModel.Textures();
+                itemModel.textures.layer0 = "item/" + item.getInternalName();
+                overwrite(itemModelFile, GSON.toJson(itemModel));
 
-                try {
-                    File itemTextureFile = new File(itemTextureFolder, item.getInternalName() + ".png");
-                    itemTextureFile.createNewFile();
-                    InputStream inStream = NobilityItems.getInstance().getResource("pack/default.png");
-                    byte[] buffer = new byte[inStream.available()];
-                    inStream.read(buffer);
-                    inStream.close();
-
-                    OutputStream outStream = new FileOutputStream(itemTextureFile);
-                    outStream.write(buffer);
-                    outStream.close();
-                } catch (IOException e) {
-                    Bukkit.getLogger().severe("Unable to create file " + item.getInternalName() + ".png in textures/item folder");
-                    e.printStackTrace();
-                    continue;
+                Path itemTextureFile = itemTextureFolder.resolve(item.getInternalName() + ".png");
+                if (!Files.exists(itemTextureFile)) {
+                    try {
+                        InputStream inStream = NobilityItems.getInstance().getResource("pack/default.png");
+                        if (inStream == null) {
+                            throw new IOException("Could not find pack/default.png");
+                        }
+                        Files.copy(inStream, itemTextureFile, StandardCopyOption.REPLACE_EXISTING);
+                    } catch (IOException e) {
+                        Bukkit.getLogger().severe("Unable to create file " + item.getInternalName() + ".png in textures/item folder");
+                        e.printStackTrace();
+                        continue;
+                    }
                 }
 
-                toWrite += "\n\t\t{ \"predicate\": { \"custom_model_data\": " + item.getCustomModelData() 
-                    + " }, \"model\": \"item/" + item.getInternalName() + "\" },";
+                ItemModel.ModelOverride override = new ItemModel.ModelOverride();
+                override.predicate = new ItemModel.ModelOverride.Predicate();
+                override.predicate.custom_model_data = item.getCustomModelData();
+                override.model = "item/" + item.getInternalName();
+                toWrite.overrides.add(override);
             }
 
-            toWrite = toWrite.substring(0, toWrite.length() - 1);
-            toWrite += "\n\t]\n}";
-            overwrite(file, toWrite);
+            overwrite(file, GSON.toJson(toWrite));
+        }
+    }
+
+    @SuppressWarnings({"unused", "MismatchedQueryAndUpdateOfCollection"})
+    private static class ItemModel {
+        private String parent;
+        private Textures textures;
+        private List<ModelOverride> overrides;
+
+        private static class Textures {
+            private String layer0;
+        }
+
+        private static class ModelOverride {
+            private Predicate predicate;
+            private String model;
+
+            private static class Predicate {
+                private int custom_model_data;
+            }
         }
     }
     

@@ -1,5 +1,6 @@
 package net.civex4.nobilityitems;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -95,7 +96,7 @@ public class CommandListener implements CommandExecutor {
 
             ItemStack item = player.getInventory().getItemInMainHand();
     
-            if (item == null) {
+            if (item.getType().isAir()) {
                 sender.sendMessage(ChatColor.RED + "You must have an item in your main hand!");
                 return true;
             }
@@ -169,7 +170,7 @@ public class CommandListener implements CommandExecutor {
     
             ItemStack item = player.getInventory().getItemInMainHand();
     
-            if (item == null) {
+            if (item.getType().isAir()) {
                 sender.sendMessage(ChatColor.RED + "You must have an item in your main hand!");
                 return true;
             }
@@ -188,8 +189,13 @@ public class CommandListener implements CommandExecutor {
                 return true;
             }
 
-            PackGenerator.generate();
-            sender.sendMessage(ChatColor.YELLOW + "Pack Generated! Check the NobilityItems config folder.");
+            try {
+                PackGenerator.generate();
+                sender.sendMessage(ChatColor.YELLOW + "Pack Generated! Check the NobilityItems config folder.");
+            } catch (IOException e) {
+                sender.sendMessage(ChatColor.RED + "Packed failed to generate! Check log for details.");
+                e.printStackTrace();
+            }
             return true;
         }
 

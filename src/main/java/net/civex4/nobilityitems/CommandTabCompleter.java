@@ -28,7 +28,7 @@ public class CommandTabCompleter implements TabCompleter {
 
         if (args.length == 1) {
             StringUtil.copyPartialMatches(args[0], COMMANDS, tabs);
-        } else if (args.length == 2 && args[0].equals("get")) {
+        } else if (args.length == 2) {
             if (args[0].equals("get")) {
                 List<String> names = new ArrayList<>();
                 for (NobilityItem item : ItemManager.getItems()) {
