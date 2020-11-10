@@ -1,5 +1,6 @@
 package net.civex4.nobilityitems;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -203,7 +204,7 @@ public class PackGenerator {
             paths
                     .filter(path -> !Files.isDirectory(path))
                     .forEach(path -> {
-                        ZipEntry zipEntry = new ZipEntry(pp.relativize(path).toString());
+                        ZipEntry zipEntry = new ZipEntry(pp.relativize(path).toString().replace(File.separatorChar, '/'));
                         try {
                             zs.putNextEntry(zipEntry);
                             Files.copy(path, zs);
