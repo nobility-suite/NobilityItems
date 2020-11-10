@@ -15,12 +15,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Set;
 import java.util.TreeMap;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
+import com.google.common.collect.ImmutableSet;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
@@ -115,8 +118,27 @@ public class PackGenerator {
             return "";
         }
         return props.entrySet().stream()
-                .map(entry -> entry.getKey() + "=" + (entry.getValue() instanceof Enum ? ((Enum<?>) entry.getValue()).name().toLowerCase(Locale.ROOT) : entry.getValue()))
+                .map(entry -> entry.getKey() + "=" + propValToString(entry.getValue()))
                 .collect(Collectors.joining(","));
+    }
+
+    private static String propValToString(Object entry) {
+        return entry instanceof Enum ? ((Enum<?>) entry).name().toLowerCase(Locale.ROOT) : String.valueOf(entry);
+    }
+
+    private static Predicate<Map<String, String>> parseSimpleMultipartCondition(JsonObject condition) {
+        Map<String, Set<String>> allowedValues = new HashMap<>();
+        for (Map.Entry<String, JsonElement> entry : condition.entrySet()) {
+            allowedValues.put(entry.getKey(), ImmutableSet.copyOf(entry.getValue().getAsString().split("\\|")));
+        }
+        return properties -> {
+            for (Map.Entry<String, Set<String>> entry : allowedValues.entrySet()) {
+                if (!entry.getValue().contains(properties.get(entry.getKey()))) {
+                    return false;
+                }
+            }
+            return true;
+        };
     }
 
     @SuppressWarnings("unchecked")
@@ -127,12 +149,12 @@ public class PackGenerator {
             throw new IOException("Unobtainable block \"" + blockName + "\" does not have a blockstate file to patch");
         }
 
+        Map<String, List<T>> allProperties = (Map<String, List<T>>) (Map<?, ?>) UnobtainableBlocks.getAllProperties(material);
+
         JsonObject blockstate = GSON.fromJson(new InputStreamReader(inStream, StandardCharsets.UTF_8), JsonObject.class);
         if (blockstate.has("variants")) {
             JsonObject variants = blockstate.getAsJsonObject("variants");
             JsonObject newVariants = new JsonObject();
-
-            Map<String, List<T>> allProperties = (Map<String, List<T>>) (Map<?, ?>) UnobtainableBlocks.getAllProperties(material);
 
             for (Map.Entry<String, JsonElement> entry : variants.entrySet()) {
                 List<Map<String, T>> combinations = new ArrayList<>();
@@ -143,7 +165,7 @@ public class PackGenerator {
                         int num = combinations.size();
                         for (T val : allProperties.get(prop)) {
                             for (int i = 0; i < num; i++) {
-                                Map<String, T> newCombo = new TreeMap<>(combo);
+                                Map<String, T> newCombo = new TreeMap<>(combinations.get(i));
                                 newCombo.put(prop, val);
                                 combinations.add(newCombo);
                             }
@@ -169,6 +191,62 @@ public class PackGenerator {
             JsonArray multipart = blockstate.getAsJsonArray("multipart");
             JsonArray newMultipart = new JsonArray();
 
+            List<Map<String, String>> combinations = new ArrayList<>();
+            combinations.add(new TreeMap<>());
+            for (String prop : allProperties.keySet()) {
+                int num = combinations.size();
+                for (T val : allProperties.get(prop)) {
+                    String strVal = propValToString(val);
+                    for (int i = 0; i < num; i++) {
+                        Map<String, String> newCombo = new TreeMap<>(combinations.get(i));
+                        newCombo.put(prop, strVal);
+                        combinations.add(newCombo);
+                    }
+                }
+                combinations.subList(0, num).clear();
+            }
+
+            Set<String> customProperties = blocks.stream()
+                    .map(block -> block.getBlockData().getAsString(false))
+                    .map(str -> str.substring(str.indexOf('[') + 1, str.length() - 1))
+                    .collect(Collectors.toSet());
+
+            for (JsonElement elem : multipart) {
+                JsonObject part = elem.getAsJsonObject();
+                JsonObject when = part.getAsJsonObject("when");
+                Predicate<Map<String, String>> condition;
+                if (when.size() == 1 && when.has("OR")) {
+                    List<Predicate<Map<String, String>>> subConditions = new ArrayList<>();
+                    for (JsonElement subCondition : when.getAsJsonArray("OR")) {
+                        subConditions.add(parseSimpleMultipartCondition(subCondition.getAsJsonObject()));
+                    }
+                    condition = properties -> subConditions.stream().anyMatch(subCondition -> subCondition.test(properties));
+                } else if (when.size() == 1 && when.has("AND")) {
+                    List<Predicate<Map<String, String>>> subConditions = new ArrayList<>();
+                    for (JsonElement subCondition : when.getAsJsonArray("AND")) {
+                        subConditions.add(parseSimpleMultipartCondition(subCondition.getAsJsonObject()));
+                    }
+                    condition = properties -> subConditions.stream().allMatch(subCondition -> subCondition.test(properties));
+                } else {
+                    condition = parseSimpleMultipartCondition(when);
+                }
+
+                JsonObject newPart = new JsonObject();
+                JsonObject newWhen = new JsonObject();
+                JsonArray or = new JsonArray();
+                for (Map<String, String> combo : combinations) {
+                    if (condition.test(combo) && !customProperties.contains(propsToString(combo))) {
+                        JsonObject conditions = new JsonObject();
+                        combo.forEach(conditions::addProperty);
+                        or.add(conditions);
+                    }
+                }
+                newWhen.add("OR", or);
+                newPart.add("when", newWhen);
+                newPart.add("apply", part.get("apply"));
+                newMultipart.add(newPart);
+            }
+
             for (NobilityBlock block : blocks) {
                 JsonObject rule = new JsonObject();
 
@@ -185,8 +263,6 @@ public class PackGenerator {
 
                 newMultipart.add(rule);
             }
-
-            newMultipart.addAll(multipart);
 
             blockstate.add("multipart", newMultipart);
         }
