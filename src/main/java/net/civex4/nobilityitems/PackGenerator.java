@@ -57,10 +57,8 @@ public class PackGenerator {
         blockTextureFolder = dataFolder.resolve("pack/assets/minecraft/textures/block");
 
         resetFolder(itemModelFolder);
-        resetFolder(itemTextureFolder);
         resetFolder(blockstatesFolder);
         resetFolder(blockModelFolder);
-        resetFolder(blockTextureFolder);
     }
 
     private static void resetFolder(Path file) throws IOException {
