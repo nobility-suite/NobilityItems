@@ -6,6 +6,7 @@ import org.bukkit.Registry;
 import org.bukkit.block.BlockFace;
 import org.bukkit.block.data.Bisected;
 import org.bukkit.block.data.BlockData;
+import org.bukkit.block.data.type.Bamboo;
 import org.bukkit.block.data.type.Campfire;
 import org.bukkit.block.data.type.CommandBlock;
 import org.bukkit.block.data.type.Door;
@@ -217,6 +218,31 @@ class UnobtainableBlocks {
                             }
                         }
                     }
+                }
+            }
+            else if (blockData instanceof Bamboo) {
+                allProperties.put(material, ImmutableMap.of(
+                        "age", Arrays.asList(0, 1),
+                        "leaves", Arrays.asList(Bamboo.Leaves.values()),
+                        "stage", Arrays.asList(0, 1)
+                ));
+                // Only large leaves are compatible with stage 1
+                for (Bamboo.Leaves leaves : new Bamboo.Leaves[] { Bamboo.Leaves.NONE, Bamboo.Leaves.SMALL }) {
+                    for (int age = 0; age <= 1; age++) {
+                        Bamboo bamboo = (Bamboo) material.createBlockData();
+                        bamboo.setLeaves(leaves);
+                        bamboo.setAge(age);
+                        bamboo.setStage(1);
+                        unobtainableBlocks.add(bamboo);
+                    }
+                }
+                // Large leaves are incompatible with age 0
+                for (int stage = 0; stage <= 1; stage++) {
+                    Bamboo bamboo = (Bamboo) material.createBlockData();
+                    bamboo.setLeaves(Bamboo.Leaves.LARGE);
+                    bamboo.setAge(0);
+                    bamboo.setStage(stage);
+                    unobtainableBlocks.add(bamboo);
                 }
             }
         }
