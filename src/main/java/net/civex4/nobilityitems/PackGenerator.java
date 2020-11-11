@@ -18,17 +18,20 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 import java.util.function.Predicate;
+import java.util.logging.Level;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
+import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import com.google.gson.JsonSyntaxException;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.configuration.Configuration;
@@ -60,14 +63,13 @@ public class PackGenerator {
         blockModelFolder = dataFolder.resolve("pack/assets/minecraft/models/block");
         blockTextureFolder = dataFolder.resolve("pack/assets/minecraft/textures/block");
 
-        resetFolder(itemModelFolder);
-        resetFolder(blockstatesFolder);
-        resetFolder(blockModelFolder);
-    }
+        Files.createDirectories(itemTextureFolder);
+        Files.createDirectories(blockTextureFolder);
+        Files.createDirectories(itemModelFolder);
+        Files.createDirectories(blockModelFolder);
+        Files.createDirectories(blockstatesFolder);
 
-    private static void resetFolder(Path file) throws IOException {
-        Files.createDirectories(file);
-        for (Path child : (Iterable<Path>) Files.list(file)::iterator) {
+        for (Path child : (Iterable<Path>) Files.list(blockstatesFolder)::iterator) {
             Files.deleteIfExists(child);
         }
     }
@@ -326,15 +328,17 @@ public class PackGenerator {
 
             for (NobilityItem item : items.get(type)) {
                 Path itemModelFile = itemModelFolder.resolve(item.getModel() + ".json");
-                ItemModel itemModel = new ItemModel();
-                if (item.hasBlock()) {
-                    itemModel.parent = "block/" + item.getInternalName();
-                } else {
-                    itemModel.parent = parent;
-                    itemModel.textures = new ItemModel.Textures();
-                    itemModel.textures.layer0 = "item/" + item.getModel();
+                if (!Files.exists(itemModelFile)) {
+                    ItemModel itemModel = new ItemModel();
+                    if (item.hasBlock()) {
+                        itemModel.parent = "block/" + item.getInternalName();
+                    } else {
+                        itemModel.parent = parent;
+                        itemModel.textures = new ItemModel.Textures();
+                        itemModel.textures.layer0 = "item/" + item.getModel();
+                    }
+                    overwrite(itemModelFile, GSON.toJson(itemModel));
                 }
-                overwrite(itemModelFile, GSON.toJson(itemModel));
 
                 Path itemTextureFile = itemTextureFolder.resolve(item.getModel() + ".png");
                 if (!Files.exists(itemTextureFile)) {
@@ -366,25 +370,38 @@ public class PackGenerator {
             patchBlockstate(type, nobilityBlocks);
 
             for (NobilityBlock block : nobilityBlocks) {
-                BlockModel model = new BlockModel();
-                model.parent = block.getParentModel();
-                model.textures = block.getTextures();
-                overwrite(blockModelFolder.resolve(block.getInternalName() + ".json"), GSON.toJson(model));
-                for (String texture : block.getTextures().values()) {
-                    if (texture.startsWith("block/")) {
-                        texture = texture.substring(6);
+                Path blockModelFile = blockModelFolder.resolve(block.getInternalName() + ".json");
+                BlockModel model;
+                if (!Files.exists(blockModelFile)) {
+                    model = new BlockModel();
+                    model.parent = "block/cube_all";
+                    model.textures = ImmutableMap.of("all", "block/" + block.getInternalName());
+                    overwrite(blockModelFile, GSON.toJson(model));
+                } else {
+                    try {
+                        model = GSON.fromJson(Files.newBufferedReader(blockModelFile, StandardCharsets.UTF_8), BlockModel.class);
+                    } catch (JsonSyntaxException e) {
+                        Bukkit.getLogger().log(Level.WARNING, "Block model for " + block.getInternalName() + " has a syntax error", e);
+                        continue;
                     }
-                    Path blockTextureFile = blockTextureFolder.resolve(texture + ".png");
-                    if (!Files.exists(blockTextureFile)) {
-                        try {
-                            InputStream inStream = NobilityItems.getInstance().getResource("pack/default.png");
-                            if (inStream == null) {
-                                throw new IOException("Could not find pack/default.png");
+                }
+                if (model.textures != null) {
+                    for (String texture : model.textures.values()) {
+                        if (texture.startsWith("block/")) {
+                            texture = texture.substring(6);
+                        }
+                        Path blockTextureFile = blockTextureFolder.resolve(texture + ".png");
+                        if (!Files.exists(blockTextureFile)) {
+                            try {
+                                InputStream inStream = NobilityItems.getInstance().getResource("pack/default.png");
+                                if (inStream == null) {
+                                    throw new IOException("Could not find pack/default.png");
+                                }
+                                Files.copy(inStream, blockTextureFile, StandardCopyOption.REPLACE_EXISTING);
+                            } catch (IOException e) {
+                                Bukkit.getLogger().severe("Unable to create file " + block.getInternalName() + ".png in textures/block folder");
+                                e.printStackTrace();
                             }
-                            Files.copy(inStream, blockTextureFile, StandardCopyOption.REPLACE_EXISTING);
-                        } catch (IOException e) {
-                            Bukkit.getLogger().severe("Unable to create file " + block.getInternalName() + ".png in textures/block folder");
-                            e.printStackTrace();
                         }
                     }
                 }

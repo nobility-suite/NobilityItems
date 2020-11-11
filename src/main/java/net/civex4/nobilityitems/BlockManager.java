@@ -46,13 +46,6 @@ class BlockManager {
 
         ConfigurationSection blockSection = blocksConfig.createSection(internalName);
         blockSection.set("blockData", block.getBlockData().getAsString(false));
-        blockSection.set("parentModel", block.getParentModel());
-        if ("block/cube_all".equals(block.getParentModel()) && block.getTextures().size() == 1 && block.getTextures().containsKey("all")) {
-            blockSection.set("texture", block.getTextures().get("all"));
-        } else {
-            ConfigurationSection textureSection = blockSection.createSection("textures");
-            block.getTextures().forEach(textureSection::set);
-        }
         if (block.hasItem()) {
             blockSection.set("hasItem", true);
         }
