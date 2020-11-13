@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.civex4.nobilityitems.impl.PackServer;
 import net.md_5.bungee.api.chat.hover.content.Text;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -209,8 +210,8 @@ public class CommandListener implements CommandExecutor {
                 e.printStackTrace();
             }
 
-            if (NobilityItems.debugPacks && player != null) {
-                PackServer.sendPack(player);
+            if (PackServer.debugPacks && player != null) {
+                PackServer.sendPack(NobilityItems.getInstance().getDataFolder(), player);
             }
 
             return true;

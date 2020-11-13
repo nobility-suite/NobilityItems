@@ -3,6 +3,7 @@ package net.civex4.nobilityitems;
 import org.bukkit.Bukkit;
 import org.bukkit.block.Block;
 import org.bukkit.block.data.BlockData;
+import org.bukkit.block.data.Waterlogged;
 import org.bukkit.configuration.ConfigurationSection;
 
 /**
@@ -14,6 +15,7 @@ public class NobilityBlock {
     private final String internalName;
     private final BlockData blockData;
     private final NobilityItem item;
+    private final boolean waterlogged;
 
     public NobilityBlock(String internalName, BlockData blockData, NobilityItem item) {
         this.internalName = internalName;
@@ -22,6 +24,7 @@ public class NobilityBlock {
         if (item != null) {
             item.setBlock(this);
         }
+        this.waterlogged = blockData instanceof Waterlogged && ((Waterlogged) blockData).isWaterlogged();
     }
 
     public NobilityBlock(String internalName, ConfigurationSection map) {
@@ -40,6 +43,7 @@ public class NobilityBlock {
         } else {
             this.item = null;
         }
+        this.waterlogged = map.getBoolean("waterlogged", blockData instanceof Waterlogged && ((Waterlogged) blockData).isWaterlogged());
     }
 
     public String getInternalName() {
@@ -56,6 +60,10 @@ public class NobilityBlock {
 
     public NobilityItem getItem() {
         return item;
+    }
+
+    public boolean isWaterlogged() {
+        return waterlogged;
     }
 
     public boolean equalsBlock(Block block) {

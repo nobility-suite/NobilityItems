@@ -1,9 +1,10 @@
-package net.civex4.nobilityitems;
+package net.civex4.nobilityitems.impl;
 
 import com.comphenix.protocol.PacketType;
 import com.comphenix.protocol.events.PacketContainer;
 import com.google.common.hash.Hashing;
 import com.sun.net.httpserver.HttpServer;
+import net.civex4.nobilityitems.NobilityItems;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
@@ -17,12 +18,13 @@ import java.util.logging.Level;
 
 public class PackServer {
     private static HttpServer server;
+    public static final boolean debugPacks = Boolean.getBoolean("nobilityitems.debugPacks");
 
-    public static void start() {
+    public static void start(File dataFolder) {
         try {
             server = HttpServer.create(new InetSocketAddress(Bukkit.getPort() + 1), 0);
             server.createContext("/pack", exchange -> {
-                byte[] bytes = Files.readAllBytes(NobilityItems.getInstance().getDataFolder().toPath().resolve("pack.zip"));
+                byte[] bytes = Files.readAllBytes(dataFolder.toPath().resolve("pack.zip"));
                 exchange.sendResponseHeaders(200, bytes.length);
                 OutputStream out = exchange.getResponseBody();
                 out.write(bytes);
@@ -46,7 +48,7 @@ public class PackServer {
         }
     }
 
-    public static void sendPack(Player target) {
+    public static void sendPack(File dataFolder, Player target) {
         if (server == null) {
             return;
         }
@@ -54,7 +56,7 @@ public class PackServer {
         String sha1;
         try {
             //noinspection UnstableApiUsage
-            sha1 = com.google.common.io.Files.hash(new File(NobilityItems.getInstance().getDataFolder(), "pack.zip"), Hashing.sha1()).toString();
+            sha1 = com.google.common.io.Files.hash(new File(dataFolder, "pack.zip"), Hashing.sha1()).toString();
         } catch (IOException e) {
             Bukkit.getLogger().log(Level.WARNING, "Failed to compute sha1 of pack.zip", e);
             return;
@@ -68,7 +70,7 @@ public class PackServer {
                 .write(1, sha1);
 
         try {
-            NobilityItems.protocolManager.sendServerPacket(target, packet);
+            Protocol.protocolManager.sendServerPacket(target, packet);
         } catch (InvocationTargetException e) {
             Bukkit.getLogger().log(Level.WARNING, "Failed to send resource pack packet", e);
         }

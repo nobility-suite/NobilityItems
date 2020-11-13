@@ -4,8 +4,10 @@ import java.io.File;
 import java.util.Collections;
 import java.util.List;
 
-import com.comphenix.protocol.ProtocolLibrary;
 import com.comphenix.protocol.ProtocolManager;
+import net.civex4.nobilityitems.impl.PackServer;
+import net.civex4.nobilityitems.impl.PlayerListener;
+import net.civex4.nobilityitems.impl.Protocol;
 import org.bukkit.block.data.BlockData;
 import org.bukkit.command.PluginCommand;
 import org.bukkit.inventory.ItemStack;
@@ -13,17 +15,16 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class NobilityItems extends JavaPlugin {
     private static NobilityItems instance;
-    static boolean debugPacks = Boolean.getBoolean("nobilityitems.debugPacks");
     static ProtocolManager protocolManager;
 
     @Override
     public void onEnable() {
         instance = this;
 
-        protocolManager = ProtocolLibrary.getProtocolManager();
+        Protocol.init(this);
 
-        if (debugPacks) {
-            PackServer.start();
+        if (PackServer.debugPacks) {
+            PackServer.start(getDataFolder());
         }
 
         PluginCommand nobilityCommand = getCommand("nobilityitems");
@@ -31,7 +32,7 @@ public class NobilityItems extends JavaPlugin {
         nobilityCommand.setExecutor(new CommandListener());
         nobilityCommand.setTabCompleter(new CommandTabCompleter());
 
-        getServer().getPluginManager().registerEvents(new PlayerListener(), this);
+        getServer().getPluginManager().registerEvents(new PlayerListener(getDataFolder()), this);
 
         reload();
     }
@@ -43,7 +44,7 @@ public class NobilityItems extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        if (debugPacks) {
+        if (PackServer.debugPacks) {
             PackServer.stop();
         }
     }
