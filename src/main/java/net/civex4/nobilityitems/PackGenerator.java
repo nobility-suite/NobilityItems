@@ -32,6 +32,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
+import net.civex4.nobilityitems.impl.ModelPartitioner;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.configuration.Configuration;
@@ -49,6 +50,7 @@ public class PackGenerator {
     private static Path blockstatesFolder;
     private static Path blockModelFolder;
     private static Path blockTextureFolder;
+    private static Path blockModelSourceFolder;
     private static Configuration config;
 
     private static void generateStructure() throws IOException {
@@ -62,14 +64,19 @@ public class PackGenerator {
         blockstatesFolder = dataFolder.resolve("pack/assets/minecraft/blockstates");
         blockModelFolder = dataFolder.resolve("pack/assets/minecraft/models/block");
         blockTextureFolder = dataFolder.resolve("pack/assets/minecraft/textures/block");
+        blockModelSourceFolder = dataFolder.resolve("pack/assets/minecraft/block_model_source");
 
         Files.createDirectories(itemTextureFolder);
         Files.createDirectories(blockTextureFolder);
         Files.createDirectories(itemModelFolder);
         Files.createDirectories(blockModelFolder);
         Files.createDirectories(blockstatesFolder);
+        Files.createDirectories(blockModelSourceFolder);
 
         for (Path child : (Iterable<Path>) Files.list(blockstatesFolder)::iterator) {
+            Files.deleteIfExists(child);
+        }
+        for (Path child : (Iterable<Path>) Files.list(blockModelFolder)::iterator) {
             Files.deleteIfExists(child);
         }
     }
@@ -370,16 +377,16 @@ public class PackGenerator {
             patchBlockstate(type, nobilityBlocks);
 
             for (NobilityBlock block : nobilityBlocks) {
-                Path blockModelFile = blockModelFolder.resolve(block.getInternalName() + ".json");
-                BlockModel model;
+                Path blockModelFile = blockModelSourceFolder.resolve(block.getInternalName() + ".json");
+                BlockModelSource model;
                 if (!Files.exists(blockModelFile)) {
-                    model = new BlockModel();
+                    model = new BlockModelSource();
                     model.parent = "block/cube_all";
                     model.textures = ImmutableMap.of("all", "block/" + block.getInternalName());
                     overwrite(blockModelFile, GSON.toJson(model));
                 } else {
                     try {
-                        model = GSON.fromJson(Files.newBufferedReader(blockModelFile, StandardCharsets.UTF_8), BlockModel.class);
+                        model = GSON.fromJson(Files.newBufferedReader(blockModelFile, StandardCharsets.UTF_8), BlockModelSource.class);
                     } catch (JsonSyntaxException e) {
                         Bukkit.getLogger().log(Level.WARNING, "Block model for " + block.getInternalName() + " has a syntax error", e);
                         continue;
@@ -404,6 +411,13 @@ public class PackGenerator {
                             }
                         }
                     }
+                }
+
+                Path generatedModelFile = blockModelFolder.resolve(block.getInternalName() + ".json");
+                if (model.nobility_transparent != null && model.nobility_transparent) {
+                    ModelPartitioner.partitionModel(blockModelFile, generatedModelFile, NobilityItems.getInstance().getDataFolder().toPath().resolve("pack"), NobilityItems.getInstance().getDataFolder());
+                } else {
+                    Files.copy(blockModelFile, generatedModelFile);
                 }
             }
         }
@@ -432,9 +446,11 @@ public class PackGenerator {
     }
 
     @SuppressWarnings("unused")
-    private static class BlockModel {
+    private static class BlockModelSource {
         private String parent;
         private Map<String, String> textures;
+
+        private Boolean nobility_transparent;
     }
     
 }
