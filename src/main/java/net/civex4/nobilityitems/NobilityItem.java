@@ -16,28 +16,29 @@ public class NobilityItem {
     private final String internalName;
     private final String displayName;
     private final Material material;
+    private final String model;
     private final int customModelData;
     private final List<String> lore;
     private final boolean hasLore;
-    private final boolean hasCustomModelData;
+    private NobilityBlock block;
 
-    NobilityItem(String id, String displayName, Material material, List<String> lore, int model) {
+    NobilityItem(String id, String displayName, Material material, List<String> lore, String model) {
         this.internalName = id;
         this.displayName = displayName;
         this.material = material;
         this.lore = lore;
-        this.customModelData = model;
+        this.model = model;
+        this.customModelData = ItemManager.getModelData(material, model);
 
         hasLore = lore != null;
-        hasCustomModelData = customModelData != -1;
+    }
+
+    void setBlock(NobilityBlock block) {
+        this.block = block;
     }
 
     public boolean hasLore() {
         return hasLore;
-    }
-
-    public boolean hasCustomModelData() {
-        return hasCustomModelData;
     }
 
     public String getInternalName() {
@@ -46,6 +47,14 @@ public class NobilityItem {
 
     public String getDisplayName() {
         return displayName;
+    }
+
+    public boolean hasCustomModel() {
+        return model != null;
+    }
+
+    public String getModel() {
+        return model;
     }
 
     public int getCustomModelData() {
@@ -58,6 +67,14 @@ public class NobilityItem {
 
     public List<String> getLore() {
         return lore;
+    }
+
+    public boolean hasBlock() {
+        return block != null;
+    }
+
+    public NobilityBlock getBlock() {
+        return block;
     }
 
     /**
@@ -105,6 +122,11 @@ public class NobilityItem {
 
         return customModelData < 0 || meta.getCustomModelData() == customModelData;
 
+    }
+
+    @Override
+    public int hashCode() {
+        return internalName.hashCode();
     }
 
     @Override

@@ -1,7 +1,7 @@
 example_item_internal_name:
   display_name: '&eCool Fuel of Exampleocity'
   material: COAL
-  model: 3
+  model: example_fuel
   lore:
     - '&cCommon Example Fuel'
     - ''
@@ -12,7 +12,7 @@ example_item_internal_name:
 example_item_with_taglist:
   display_name: '&eRARE Fuel of Exampleocity'
   material: EMERALD
-  model: 2
+  model: example_gem
   lore:
     - '&cCommon Example Fuel'
   tags:
