@@ -95,8 +95,6 @@ public class ModelPartitioner {
                 }
             }
 
-            System.out.println(GSON.toJson(model));
-
             List<BlockModel.Element> newElements = new ArrayList<>();
 
             for (BlockModel.Element element : model.elements) {
@@ -149,7 +147,6 @@ public class ModelPartitioner {
                     if (!texture.startsWith("#")) {
                         throw new IOException("Texture must start with #");
                     }
-                    System.out.println(texture);
                     texture = model.textures.get(texture.substring(1));
                     if (texture == null) {
                         throw new IOException("Texture not found");
@@ -204,11 +201,11 @@ public class ModelPartitioner {
                                 newElement.to[xAxis] = element.from[xAxis] + rectangle.x2 * xSize / partitionResult.width;
                             }
                             if (yInverted) {
-                                newElement.from[yAxis] = element.to[yAxis] - rectangle.y2 * ySize / partitionResult.height;
-                                newElement.to[yAxis] = element.to[yAxis] - rectangle.y1 * ySize / partitionResult.height;
-                            } else {
                                 newElement.from[yAxis] = element.from[yAxis] + rectangle.y1 * ySize / partitionResult.height;
                                 newElement.to[yAxis] = element.from[yAxis] + rectangle.y2 * ySize / partitionResult.height;
+                            } else {
+                                newElement.from[yAxis] = element.to[yAxis] - rectangle.y2 * ySize / partitionResult.height;
+                                newElement.to[yAxis] = element.to[yAxis] - rectangle.y1 * ySize / partitionResult.height;
                             }
                             newElement.rotation = element.rotation;
                             newElement.shade = element.shade;
@@ -229,7 +226,6 @@ public class ModelPartitioner {
 
     private static InputStream getResource(Path packDir, ZipFile clientJar, String path) throws IOException {
         Path resolved = packDir.resolve(path);
-        System.out.println(resolved.toAbsolutePath());
         if (Files.exists(resolved)) {
             return Files.newInputStream(resolved);
         }
