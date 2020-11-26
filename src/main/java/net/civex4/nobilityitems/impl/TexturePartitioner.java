@@ -109,14 +109,14 @@ public class TexturePartitioner {
                     int idx = point.x + point.y * width;
                     color[idx] = currentColor;
                     if (point.x == 0 || point.y == 0 || point.x == width - 1 || point.y == height - 1) {
-                        if (alpha[idx] == 0) {
+                        if (alpha[idx] < 128) {
                             colorAdjacencyMatrix.get(0).set(currentColor);
                             colorAdjacencyMatrix.get(currentColor).set(0);
                         }
                     }
 
                     if (point.x != 0 && color[idx - 1] != currentColor) {
-                        if ((alpha[idx] == 0) == (alpha[idx - 1] == 0)) {
+                        if ((alpha[idx] < 128) == (alpha[idx - 1] < 128)) {
                             nextInRegion.add(new Point(point.x - 1, point.y));
                         } else if (color[idx - 1] == 0) {
                             nextRegion.add(new Point(point.x - 1, point.y));
@@ -126,7 +126,7 @@ public class TexturePartitioner {
                         }
                     }
                     if (point.y != 0 && color[idx - width] != currentColor) {
-                        if ((alpha[idx] == 0) == (alpha[idx - width] == 0)) {
+                        if ((alpha[idx] < 128) == (alpha[idx - width] < 128)) {
                             nextInRegion.add(new Point(point.x, point.y - 1));
                         } else if (color[idx - width] == 0) {
                             nextRegion.add(new Point(point.x, point.y - 1));
@@ -136,7 +136,7 @@ public class TexturePartitioner {
                         }
                     }
                     if (point.x != width - 1 && color[idx + 1] != currentColor) {
-                        if ((alpha[idx] == 0) == (alpha[idx + 1] == 0)) {
+                        if ((alpha[idx] < 128) == (alpha[idx + 1] < 128)) {
                             nextInRegion.add(new Point(point.x + 1, point.y));
                         } else if (color[idx + 1] == 0) {
                             nextRegion.add(new Point(point.x + 1, point.y));
@@ -146,7 +146,7 @@ public class TexturePartitioner {
                         }
                     }
                     if (point.y != height - 1 && color[idx + width] != currentColor) {
-                        if ((alpha[idx] == 0) == (alpha[idx + width] == 0)) {
+                        if ((alpha[idx] < 128) == (alpha[idx + width] < 128)) {
                             nextInRegion.add(new Point(point.x, point.y + 1));
                         } else if (color[idx + width] == 0) {
                             nextRegion.add(new Point(point.x, point.y + 1));
@@ -223,10 +223,10 @@ public class TexturePartitioner {
         Arrays.setAll(verticalEdges, i -> HashBiMap.create());
 
         for (int x = 0; x < width; x++) {
-            if (alpha[x] != 0) {
+            if (alpha[x] >= 128) {
                 horizontalEdges[color[x]].put(new Point(x, 0), new Point(x + 1, 0));
             }
-            if (alpha[alpha.length - width + x] != 0) {
+            if (alpha[alpha.length - width + x] >= 128) {
                 horizontalEdges[color[alpha.length - width + x]].put(new Point(x, height), new Point(x + 1, height));
             }
         }
@@ -246,10 +246,10 @@ public class TexturePartitioner {
             }
         }
         for (int y = 0; y < height; y++) {
-            if (alpha[y * width] != 0) {
+            if (alpha[y * width] >= 128) {
                 verticalEdges[color[y * width]].put(new Point(0, y), new Point(0, y + 1));
             }
-            if (alpha[(y + 1) * width - 1] != 0) {
+            if (alpha[(y + 1) * width - 1] >= 128) {
                 verticalEdges[color[(y + 1) * width - 1]].put(new Point(width, y), new Point(width, y + 1));
             }
         }
@@ -284,7 +284,7 @@ public class TexturePartitioner {
             while ((v = horizontalEdges[col].inverse().get(firstPoint)) != null) {
                 firstPoint = v;
             }
-            boolean clockwise = color[firstPoint.x + firstPoint.y * width] == col;
+            boolean clockwise = firstPoint.y != height && color[firstPoint.x + firstPoint.y * width] == col;
             Point point = firstPoint;
             do {
                 points.add(point);
@@ -792,7 +792,7 @@ public class TexturePartitioner {
         for (int hIndex = 0; hIndex < horizontalLines.size(); hIndex++) {
             LineSegment hLine = horizontalLines.get(hIndex);
             // if the top-left pixel is transparent, and there is an attached vertical line, we have a rectangle
-            if (hLine.a.y < height && alpha[hLine.a.x + hLine.a.y * width] != 0) {
+            if (hLine.a.y < height && alpha[hLine.a.x + hLine.a.y * width] >= 128) {
                 int vIndex = Collections.binarySearch(vPointsView, hLine.a, V_COMPARATOR);
                 if (vIndex >= 0) {
                     LineSegment rightHLine = hLine;
